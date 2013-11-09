@@ -29,7 +29,10 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		//list = root.list();
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
 		JScrollPane scroll = new JScrollPane(projectPanel);
-		scroll.setBounds(5,60,500,50);
+		scroll.setBounds(5,100,500,50);
+		
+		CreateChat newChat = new CreateChat();
+		add(newChat);
 		
 		if (projects != (null)){
 			for (String string : list){
