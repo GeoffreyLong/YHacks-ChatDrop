@@ -45,7 +45,6 @@ public class Search {
 		ArrayList<File> directories = new ArrayList<File>();
 		CoreMain main = CoreMain.get();
 		File root = main.getRootDirectory();
-		System.out.println(root);
 		directories.addAll(getAllSubdirectories(root));	
 		return directories;
 	}
