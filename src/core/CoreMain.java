@@ -3,9 +3,10 @@ package core;
 import java.io.File;
 
 import core.init.UserTemp;
+import core.objects.User;
 
 public class CoreMain {
-	UserTemp owner;
+	User owner;
 	File rootDirectory;
 	
 	private static ThreadLocal<CoreMain> core = new ThreadLocal<CoreMain>()
@@ -17,7 +18,7 @@ public class CoreMain {
 		}
 	};
 	
-	public CoreMain get()
+	public static CoreMain get()
 	{
 		return core.get();
 	}
@@ -25,6 +26,11 @@ public class CoreMain {
 	public File getRootDirectory()
 	{
 		return rootDirectory;
+	}
+	
+	public User getOwner()
+	{
+		return owner;
 	}
 	
 	

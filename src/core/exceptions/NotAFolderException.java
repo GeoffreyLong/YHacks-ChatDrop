@@ -2,6 +2,10 @@ package core.exceptions;
 
 public class NotAFolderException extends RuntimeException{
 
+	public NotAFolderException(String string) {
+		// TODO Auto-generated constructor stub
+	}
+
 	/**
 	 * 
 	 */
