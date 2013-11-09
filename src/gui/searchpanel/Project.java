@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.File;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -18,8 +19,13 @@ public class Project extends JButton implements Comparable<Project> {
 		setBounds(5,5,275,45);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
+		setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/Button.png")));  
+		setBorderPainted(false);  
+		setFocusPainted(false);  
+		setContentAreaFilled(false);  
+		setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/ButtonPressed.png")));
+		
 		this.projectName = file.getName();
-		System.out.println(projectName);
 		
 		setNotificationNum();
 		this.notifications = getNotificationNum();
