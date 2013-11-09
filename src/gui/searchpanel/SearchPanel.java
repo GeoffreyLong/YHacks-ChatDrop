@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -73,6 +74,13 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		add(scroll);
 	}
 
+	public void addFiller(){
+        Dimension minSize = new Dimension(270, 10);
+        Dimension prefSize = new Dimension(270, 10);
+        Dimension maxSize = new Dimension(Short.MAX_VALUE, 10);
+        projectPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+	}
+	
 	public void insertUpdate(DocumentEvent arg0) {
 		String desired = searchField.getText();
 		projectPanel.removeAll();
@@ -80,6 +88,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		if (projects != null){
 			for (Project project : projects){
 				if (project.getProjectName().substring(0,desired.length()).contains(desired)){
+					addFiller();
 					projectPanel.add(project);
 				}
 			}
