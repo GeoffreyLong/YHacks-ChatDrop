@@ -31,13 +31,21 @@ public class Frame {
 		gui.searchpanel.SearchPanel searchPanel = new gui.searchpanel.SearchPanel(list);
 		searchPanel.setBounds(5,5,295,660);
 		frame.add(searchPanel);
+		frame.validate();
+		frame.repaint();
+	}
+	public void initEmptyChat(){
+		gui.chatpanel.EmptyChat empty = new gui.chatpanel.EmptyChat();
+		empty.setBounds(305,5,785,490);
+		frame.add(empty);
+		frame.validate();
+		frame.repaint();
 	}
 	public void initChat(){
 		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(null);
 		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel();
 		chatPanel.setBounds(305,5,785,490);
 		entryPanel.setBounds(305,500,785,165);
-		entryPanel.setVisible(false);
 		frame.add(chatPanel);
 		frame.add(entryPanel);
 		frame.validate();
