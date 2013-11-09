@@ -10,8 +10,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
-import java.util.Calendar;
-import java.util.Date;
 
 import javax.json.Json;
 import javax.json.JsonArray;

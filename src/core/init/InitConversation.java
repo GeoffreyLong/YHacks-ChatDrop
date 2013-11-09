@@ -7,18 +7,15 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
-import java.util.Calendar;
 
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonObjectBuilder;
-import javax.json.JsonValue;
 import javax.json.JsonWriter;
 
 import org.joda.time.DateTime;
-import org.joda.time.JodaTimePermission;
 
-import com.fasterxml.jackson.core.JsonFactory;
+import com.dropbox.core.DbxException;
 
 import core.CoreMain;
 import core.exceptions.NotAFolderException;
@@ -32,7 +29,7 @@ public class InitConversation implements Serializable
 	 */
 	private static final long serialVersionUID = 6656076942650832481L;
 
-	public InitConversation(SharedFolder folder)
+	public InitConversation(SharedFolder folder) throws DbxException
 	{
 		File chat;
 		if((chat = folder.getChatFolder()) != null)
