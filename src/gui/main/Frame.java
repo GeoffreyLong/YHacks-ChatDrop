@@ -43,4 +43,10 @@ public class Frame {
 		frame.validate();
 		frame.repaint();
 	}
+	public void newUser(){
+		NewUserPanel newUser = new NewUserPanel();
+		frame.add(newUser);
+		frame.validate();
+		frame.repaint();
+	}
 }
