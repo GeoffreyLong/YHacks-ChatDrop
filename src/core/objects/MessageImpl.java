@@ -6,7 +6,7 @@ public class MessageImpl implements Message{
 	private String message;
 	private DateTime date;
 	private String name;
-	public MessageImpl(String s,Calendar c){
+	public MessageImpl(String s,DateTime c){
 		date = c;
 		message=s;
 	}

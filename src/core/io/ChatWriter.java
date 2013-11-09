@@ -20,6 +20,8 @@ import javax.json.JsonReader;
 import javax.json.JsonValue;
 import javax.json.JsonWriter;
 
+import org.joda.time.DateTime;
+
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxException;
 
@@ -38,13 +40,12 @@ public class ChatWriter {
 		long userId = user.getAccountInfo().userId;
 		File writeTo = new File(workingDir,""+userId+".json");
 		BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream (writeTo),StandardCharsets.UTF_8));
-		Calendar cal = Calendar.getInstance();
-		Date now = cal.getTime();
+		DateTime cal = new DateTime();
 		JsonReader jRead = Json.createReader(read);
 		JsonObject jobj = jRead.readObject();
 		JsonArray ja= (JsonArray) jobj.get("messages");
 		//Store cal as cal, not as string.
-		JsonValue next =   Json.createObjectBuilder().add("message", message).add("date",(JsonValue)cal).build();
+		JsonValue next =   Json.createObjectBuilder().add("message", message).add("date",cal.toString()).build();
 		//is the cast ok?
 		ja.add(next);
 		jRead.close();
