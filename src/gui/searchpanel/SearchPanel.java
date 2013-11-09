@@ -1,6 +1,8 @@
 package gui.searchpanel;
 
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Collections;
@@ -30,8 +32,13 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		list = new LinkedList<String>();
 		//list = root.list();
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
+		newChat.setPreferredSize(new Dimension(280,50));
+		newChat.setMaximumSize(new Dimension(275,50));
+		newChat.setAlignmentY(Component.CENTER_ALIGNMENT);
+		projectPanel.add(newChat);
 		JScrollPane scroll = new JScrollPane(projectPanel);
-		scroll.setBounds(5,100,500,50);
+		scroll.setBounds(5,60,280,580);
+		projectPanel.setBounds(5,60,280,580);
 		
 		newChat.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -51,8 +58,6 @@ public class SearchPanel extends JPanel implements DocumentListener {
 			}
 			Collections.sort(projects);
 		}
-		
-		projectPanel.add(newChat);
 		
 		searchField = new JTextField();
 		searchField.setBounds(5,5,285,50);
