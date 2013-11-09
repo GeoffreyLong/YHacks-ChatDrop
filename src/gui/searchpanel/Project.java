@@ -1,6 +1,7 @@
 package gui.searchpanel;
 
 import java.awt.Color;
+import java.io.File;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -12,12 +13,14 @@ public class Project extends JButton implements Comparable<Project> {
 	private int notifications;
 	private String[] users;
 	
-	Project(String projectName/*, int notifications*/){
+	Project(File file){
 		setLayout(null);
 		setBounds(5,5,275,45);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
-		this.projectName = projectName;
+		this.projectName = file.getName();
+		System.out.println(projectName);
+		
 		setNotificationNum();
 		this.notifications = getNotificationNum();
 		JLabel notification = new JLabel(Integer.toString(this.notifications));
