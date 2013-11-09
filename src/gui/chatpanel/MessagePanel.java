@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MessagePanel extends JPanel{
+	private int size;
 	public MessagePanel(core.objects.Message message){
 		setLayout(null);
 		JLabel userName = new JLabel(message.getUserName());
@@ -16,9 +17,13 @@ public class MessagePanel extends JPanel{
 	}
 	
 	//need to use an algorithm to get the height from the amount of text
-	public int getMessageSize(String text){
-		int size = 100;
+	private int getMessageSize(String text){
+		size = 100;
 		
+		return size;
+	}
+	
+	public int getYSize(){
 		return size;
 	}
 }

@@ -9,4 +9,7 @@ public class ChatPanel extends JPanel {
 	public ChatPanel(){
 		setBorder(BorderFactory.createLineBorder(Color.black));
 	}
+	public void panelInit(core.objects.Message[] messages){
+		
+	}
 }
