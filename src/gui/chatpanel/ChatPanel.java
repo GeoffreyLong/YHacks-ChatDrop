@@ -1,5 +1,7 @@
 package gui.chatpanel;
 
-public class ChatPanel {
+import javax.swing.JPanel;
+
+public class ChatPanel extends JPanel {
 
 }
