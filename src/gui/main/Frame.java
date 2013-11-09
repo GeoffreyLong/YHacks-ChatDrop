@@ -24,8 +24,6 @@ public class Frame {
             }
         };
         frame.addWindowListener(exitListener);
-        initSearch();
-        initChat();
 	}
 	public void initSearch(){
 		gui.searchpanel.SearchPanel searchPanel = new gui.searchpanel.SearchPanel();
