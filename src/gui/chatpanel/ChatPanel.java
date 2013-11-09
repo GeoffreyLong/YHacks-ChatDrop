@@ -30,6 +30,7 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 		}
 		else{
 			removeAll();
+			innerPanel.removeAll();
 			setBorder(BorderFactory.createLineBorder(Color.black));
 			innerPanel = new JPanel();
 			innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS)); 
