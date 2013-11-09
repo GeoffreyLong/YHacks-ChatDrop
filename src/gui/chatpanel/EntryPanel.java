@@ -33,14 +33,14 @@ public class EntryPanel extends JPanel{
         KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
         InputMap inputMap = entryArea.getInputMap();
         inputMap.put(enter, new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent ae) {
                 System.out.println("Enter released");
             }
         });
 
         entryArea.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK, true), "Shenter");
         entryArea.getActionMap().put("Shenter", new AbstractAction() {
-            public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent ae) {
                 System.out.println("Shift+Enter released");
             }
         });
