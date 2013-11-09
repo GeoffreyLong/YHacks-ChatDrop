@@ -16,6 +16,7 @@ import javax.json.JsonObject;
 import javax.json.JsonReader;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormatter;
 
 import core.objects.Message;
 import core.objects.MessageImpl;
@@ -62,8 +63,7 @@ public class ChatReader {
 			for(int i=0;i<ja.size();i++){
 				JsonObject singleMessage = ja.getJsonObject(i);
 				
-				String s = singleMessage.getString("date");//.toString().replaceAll("\"", "");
-				System.out.println(s);
+				String s = singleMessage.getString("date");
 				Message m = new MessageImpl(name,singleMessage.getString("message"),new DateTime(s));
 				 messages.add(m);
 			}
