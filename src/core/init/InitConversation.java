@@ -7,6 +7,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
+import java.nio.charset.StandardCharsets;
 
 import core.CoreMain;
 import core.exceptions.NotAFolderException;
@@ -53,7 +54,10 @@ public class InitConversation implements Serializable
 		{
 			try {
 				logFile.createNewFile();
-				BufferedWriter write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream (logFile)));
+				BufferedWriter write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile), StandardCharsets.UTF_8));
+				
+				
+				
 			} catch (IOException e) {
 				
 				e.printStackTrace();
