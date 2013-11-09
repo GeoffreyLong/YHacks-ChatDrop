@@ -32,9 +32,8 @@ public class InitiateConnection {
 	        	//Make GUI for authorization
 	        	
 	        	gui.main.Frame frame = new gui.main.Frame();
-	        	String coder = frame.newUser(authorizeUrl);
+	        	String code = frame.newUser(authorizeUrl);
 	        	
-	        	String code = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
 	        	DbxAuthFinish authFinish = webAuth.finish(code);
 	        	File authCodeFolder= new File("authCode");
 	        	boolean worked = authCodeFolder.mkdir();
@@ -56,8 +55,8 @@ public class InitiateConnection {
 	        return client;
 	        
 	 }
-	 public static void main(String[] args) throws Exception{
+	/* public static void main(String[] args) throws Exception{
 		 authenticate();
-	}
+	}*/
 	 
 }

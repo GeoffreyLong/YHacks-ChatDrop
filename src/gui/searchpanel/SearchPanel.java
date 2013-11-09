@@ -19,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import com.dropbox.core.DbxException;
+
 import core.display.MessageSorter;
 import core.init.InitConversation;
 import core.objects.SharedFolder;
@@ -56,19 +58,18 @@ public class SearchPanel extends JPanel implements DocumentListener {
 			public void actionPerformed(ActionEvent e) {
 				java.io.File file = newChat.getFile();
 				SharedFolder a = new SharedFolderImpl(file);
-				//InitConversation.create(a);
-				//MessageSorter messages = new MessageSorter(a);
-				//messages.getMessages(10);
+				try {
+					InitConversation.create(a);
+					MessageSorter messages = new MessageSorter(a);
+					messages.getMessages(10);
+				} catch (DbxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
 		projectPanel.add(newChat);
-		
-		newChat.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e) {
-				//TODO
-			}
-		});
 		
 		addProjects(files);
 		
@@ -129,6 +130,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 						//get back the arraylist of messages
 						//core.objects.Message[] messages = getallmessages
 						//gui.main.Frame.initChat(messages);
+						
 					}
 				});
 				projects.add(proj);

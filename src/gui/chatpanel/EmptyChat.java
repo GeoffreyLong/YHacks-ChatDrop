@@ -6,11 +6,11 @@ import javax.swing.JPanel;
 public class EmptyChat extends JPanel{
 	public EmptyChat(){
 		setLayout(null);
-		setBounds(0,0,600,600);
+		setBounds(150,200,200,200);
 		JLabel welcomeLabel = new JLabel("<html>"
 				+ "Welcome to Chatterbox, <br> Choose a chat to begin"
 				+ "</html>");
-		welcomeLabel.setBounds(100,100,500,500);
+		welcomeLabel.setBounds(60,5,200,100);
 		add(welcomeLabel);
 	}
 }

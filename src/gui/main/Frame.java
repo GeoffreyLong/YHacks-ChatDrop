@@ -15,8 +15,9 @@ public class Frame {
 	public static JFrame frame = new JFrame();
 	public Frame(){
 		frame.setVisible(true);
-		frame.setBounds(100, 100, 600, 500);
+		frame.setBounds(25, 25, 1200, 700);
 		frame.getContentPane().setBackground(new Color(0x123456));
+		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setLayout(null);
 		WindowListener exitListener = new WindowAdapter() {
             @Override
@@ -25,6 +26,9 @@ public class Frame {
                 if (confirm == 0) {
                 	//Main.closeConnection();
                 	System.exit(0);
+                }
+                else{
+                	frame.setVisible(true);
                 }
             }
         };
@@ -39,7 +43,7 @@ public class Frame {
 	}
 	public void initEmptyChat(){
 		gui.chatpanel.EmptyChat empty = new gui.chatpanel.EmptyChat();
-		empty.setBounds(305,5,785,490);
+		empty.setBounds(500,300,330,100);
 		frame.add(empty);
 		frame.validate();
 		frame.repaint();
@@ -55,8 +59,8 @@ public class Frame {
 		frame.repaint();
 	}
 	public String newUser(String authorizeUrl){
-		frame.setBounds(50,50,900,600);
 		NewUserPanel newUser = new NewUserPanel(authorizeUrl);
+		frame.setLayout(null);
 		frame.add(newUser);
 		frame.validate();
 		frame.repaint();
@@ -65,6 +69,10 @@ public class Frame {
 		frame.getContentPane().removeAll();
 		frame.validate();
 		frame.repaint();
+		
+		core.search.Search obj = new core.search.Search();
+		initSearch(obj.getAllSubdirectoriesOfRoot());
+		initEmptyChat();
 		
 		return newUser.getURL();
 	}
