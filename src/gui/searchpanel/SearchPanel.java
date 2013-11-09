@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -22,16 +23,15 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	final JTextField searchField;
 	//File root;
 	List<Project> projects;
-	List<String> list;
+	List<File> files;
 	JPanel projectPanel = new JPanel();
 	CreateChat newChat = new CreateChat();
 	
-	public SearchPanel(){
+	public SearchPanel(List<File> files){
 		setLayout(null);
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		//root = getRoot();
-		list = new LinkedList<String>();
-		//list = root.list();
+		
+		this.files = files;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
 		JScrollPane scroll = new JScrollPane(projectPanel);
 		scroll.setBounds(5,60,280,580);
@@ -50,9 +50,9 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		});
 		
 		projects = new LinkedList<Project>();
-		if (!list.isEmpty()){
-			for (String string : list){
-				Project proj = new Project(string);
+		if (!files.isEmpty()){
+			for (File file : files){
+				Project proj = new Project(file);
 				
 				proj.setPreferredSize(new Dimension(270,50));
 				proj.setMaximumSize(new Dimension(270,50));
@@ -61,7 +61,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 				
 				proj.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
-						//TODO 
+						//Method call to get messages from folder
 					}
 				});
 				projects.add(proj);
