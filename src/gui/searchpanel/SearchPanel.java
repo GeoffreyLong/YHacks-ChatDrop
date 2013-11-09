@@ -34,7 +34,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		this.files = files;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
 		JScrollPane scroll = new JScrollPane(projectPanel);
-		scroll.setBounds(5,60,280,580);
+		scroll.setBounds(5,60,290,590);
 		projectPanel.setBounds(5,60,280,580);
 		
 		newChat.setPreferredSize(new Dimension(270,50));
@@ -58,7 +58,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		addProjects(files);
 		
 		searchField = new JTextField();
-		searchField.setBounds(5,5,285,50);
+		searchField.setBounds(5,5,290,50);
 		searchField.getDocument().addDocumentListener(this);
 		add(searchField);
 		add(scroll);

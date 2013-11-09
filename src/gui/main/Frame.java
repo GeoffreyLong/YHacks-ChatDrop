@@ -29,7 +29,7 @@ public class Frame {
 	}
 	public void initSearch(List<File> list){
 		gui.searchpanel.SearchPanel searchPanel = new gui.searchpanel.SearchPanel(list);
-		searchPanel.setBounds(5,5,295,660);
+		searchPanel.setBounds(5,5,300,660);
 		frame.add(searchPanel);
 		frame.validate();
 		frame.repaint();
@@ -44,8 +44,8 @@ public class Frame {
 	public static void initChat(core.objects.Message[] messages){
 		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(messages);
 		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel();
-		chatPanel.setBounds(305,5,785,490);
-		entryPanel.setBounds(305,500,785,165);
+		chatPanel.setBounds(310,5,785,490);
+		entryPanel.setBounds(310,500,785,165);
 		frame.add(chatPanel);
 		frame.add(entryPanel);
 		frame.validate();
