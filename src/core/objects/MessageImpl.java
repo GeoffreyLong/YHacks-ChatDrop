@@ -3,20 +3,16 @@ package core.objects;
 import org.joda.time.DateTime;
 
 public class MessageImpl implements Message{
-
-	public String getUserName() {
-		// TODO Auto-generated method stub
-		return null;
+	private String message;
+	private DateTime date;
+	private String name;
+	public MessageImpl(String s,Calendar c){
+		date = c;
+		message=s;
 	}
-
-	public DateTime getDate() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getMessageText() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	//Fix these
+	public String getMessageText(){ return message;}
+	public String getUserName(){return name;}
+	public DateTime getDate(){return date;}
 
 }
