@@ -3,6 +3,7 @@ package core.search;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class Search {
 		
 		for(String sd : subDirectories)
 		{
+			if(sd.equals(".git")) continue;
 			File temp = new File(file, sd);
 			subs.add(temp);
 			ArrayList<File> currSubs = getAllSubdirectories(temp);
@@ -51,10 +53,8 @@ public class Search {
 	
 	public List<SharedFolder> getCurrentConversations()
 	{
-		CoreMain main = CoreMain.get();
-		File root = main.getRootDirectory();
+		List<File> allFolders = getAllSubDirectoriesOfRoot();
 		
-		root.list(filter);
 		
 		
 		
@@ -63,13 +63,19 @@ public class Search {
 		return null;
 	}
 	
-	public static void main(String[] args)
+	private List<File> getAllSubDirectoriesOfRoot() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public static void main(String[] args) throws IOException
 	{
 		Search sMain = new Search();
 		List<File> subs = sMain.getAllSubdirectoriesOfRoot();
 		for(File f : subs)
 		{
 			System.out.println(f.getAbsolutePath());
+			System.out.println(f.getName());
 		}
 	}
 }
