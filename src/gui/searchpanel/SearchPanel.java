@@ -19,6 +19,11 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import core.display.MessageSorter;
+import core.init.InitConversation;
+import core.objects.SharedFolder;
+import core.objects.SharedFolderImpl;
+
 public class SearchPanel extends JPanel implements DocumentListener {
 	final JTextField searchField;
 	//File root;
@@ -47,6 +52,15 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		newChat.setContentAreaFilled(false);  
 		newChat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/ButtonPressed.png")));
 		newChat.setAlignmentX(Component.CENTER_ALIGNMENT);
+		newChat.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				java.io.File file = newChat.getFile();
+				SharedFolder a = new SharedFolderImpl(file);
+				//InitConversation.create(a);
+				//MessageSorter messages = new MessageSorter(a);
+				//messages.getMessages(10);
+			}
+		});
 		
 		projectPanel.add(newChat);
 		
