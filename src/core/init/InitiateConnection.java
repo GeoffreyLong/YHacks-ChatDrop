@@ -56,8 +56,8 @@ public class InitiateConnection {
 	        return client;
 	        
 	 }
-	 //public static void main(String[] args) throws Exception{
-	//	 authenticate();
-	// }
+	 public static void main(String[] args) throws Exception{
+		 authenticate();
+	}
 	 
 }

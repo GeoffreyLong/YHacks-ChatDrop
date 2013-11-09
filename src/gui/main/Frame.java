@@ -55,13 +55,17 @@ public class Frame {
 		frame.repaint();
 	}
 	public String newUser(String authorizeUrl){
+		frame.setBounds(50,50,900,600);
 		NewUserPanel newUser = new NewUserPanel(authorizeUrl);
 		frame.add(newUser);
-		frame.pack();
 		frame.validate();
 		frame.repaint();
 		
 		while(newUser.getURL() == null);
+		frame.getContentPane().removeAll();
+		frame.validate();
+		frame.repaint();
+		
 		return newUser.getURL();
 	}
 }

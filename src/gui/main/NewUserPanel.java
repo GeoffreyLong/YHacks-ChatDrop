@@ -10,13 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class NewUserPanel extends JPanel implements ActionListener{
-	private JTextField url;
-	private boolean readyBoolean;
+	private final JTextField url;
+	private boolean readyBoolean = false;
 	
 	public NewUserPanel(String authorizeUrl){
 		setLayout(null);
 		setVisible(true);
-		setBounds(0,0,900,700);
+		setBounds(0,0,900,600);
 
 		JLabel welcomeLabel = new JLabel("<html>"
 				+ "Welcome to ChatterBox"
@@ -40,17 +40,18 @@ public class NewUserPanel extends JPanel implements ActionListener{
 				+ "<li> Paste it to the text area and submit </li>"
 				+ "</ul>"
 				+ "</html>");
-		welcomeLabel.setBounds(100,100,800,500);
+		welcomeLabel.setBounds(100,100,800,300);
 		
 		url = new JTextField();
-		url.setBounds(200,810,400,30);
+		url.setBounds(150,500,400,30);
 		
 		
 		JButton online = new JButton("Submit");
-		online.setBounds(700,810,100,30);
+		online.setBounds(600,500,100,30);
 		online.addActionListener(this);
 		
 		add(welcomeLabel);
+		add(online);
 		add(url);
 	}
 	public Dimension getPreferredSize() {
@@ -62,7 +63,9 @@ public class NewUserPanel extends JPanel implements ActionListener{
 		}
 	}
 	public String getURL(){
-		if(readyBoolean = true){
+		this.setFocusable(true);
+		url.requestFocus();
+		if(readyBoolean){
 			return url.getText();
 		}
 		else{
