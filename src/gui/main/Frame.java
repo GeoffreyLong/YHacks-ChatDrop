@@ -74,7 +74,8 @@ public class Frame {
 		frame.validate();
 		frame.repaint();
 	}
-	public static void chatQuickUpdate(MessageSorter messages, SharedFolder sharedFolder){
+	public static void chatQuickUpdate(SharedFolder sharedFolder){
+		MessageSorter messages = new MessageSorter(sharedFolder);
 		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(messages);
 		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel(sharedFolder, messages);
 		chatPanel.setBounds(310,65,780,430);
@@ -84,8 +85,8 @@ public class Frame {
 	public static void initChat(MessageSorter messages, SharedFolder sharedFolder){
 		welcomePanel();
 		empty.setVisible(false);
-		chatQuickUpdate(messages, sharedFolder);
-		Timer timer = new Timer(5000, new gui.chatpanel.Chat(messages, sharedFolder));
+		chatQuickUpdate(sharedFolder);
+		Timer timer = new Timer(5000, new gui.chatpanel.Chat(sharedFolder));
 		timer.start();
 	}
 	public static void updateChat(ChatPanel chatPanel, EntryPanel entryPanel){

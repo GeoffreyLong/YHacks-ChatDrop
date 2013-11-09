@@ -56,7 +56,7 @@ public class EntryPanel extends JPanel implements ActionListener{
         InputMap inputMap = entryArea.getInputMap();
         inputMap.put(enter, new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-            	
+            	pipeData();
             }
         });
 
@@ -90,7 +90,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-    	gui.main.Frame.chatQuickUpdate(messages, sharedFolder);
+    	gui.main.Frame.chatQuickUpdate(sharedFolder);
     	entryArea.setText("");
 	}
 }
