@@ -41,8 +41,8 @@ public class Frame {
 		frame.validate();
 		frame.repaint();
 	}
-	public void initChat(){
-		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(null);
+	public static void initChat(core.objects.Message[] messages){
+		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(messages);
 		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel();
 		chatPanel.setBounds(305,5,785,490);
 		entryPanel.setBounds(305,500,785,165);
