@@ -6,6 +6,7 @@ public class Start {
 		try{
 			frame = new Frame();
 		}catch(Exception e){
+			e.printStackTrace();
 			System.out.println("GUI could not instantiate");
 		}
 	}
