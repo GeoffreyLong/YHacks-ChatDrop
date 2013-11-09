@@ -23,6 +23,8 @@ import org.joda.time.DateTime;
 import com.dropbox.core.DbxClient;
 import com.dropbox.core.DbxException;
 
+import core.CoreMain;
+import core.objects.Message;
 import core.objects.SharedFolder;
 
 public class ChatWriter {
@@ -32,6 +34,12 @@ public class ChatWriter {
 	public ChatWriter(SharedFolder name, DbxClient client){
 		projectName=name;
 		user=client;
+	}
+	
+	public ChatWriter(SharedFolder name, Message message)
+	{
+		this(name, CoreMain.get().getOwner().getDbxClient());
+		this.writeTo(message.getMessageText());
 	}
 	public void writeTo(String message) throws DbxException, FileNotFoundException, IOException{
 		File workingDir= projectName.getChatFolder();
