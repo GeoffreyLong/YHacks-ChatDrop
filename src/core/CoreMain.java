@@ -5,6 +5,7 @@ import java.io.File;
 import com.dropbox.core.DbxClient;
 
 import core.init.InitiateConnection;
+import core.objects.OwnerImpl;
 import core.objects.User;
 import core.objects.UserImpl;
 
@@ -45,7 +46,7 @@ public class CoreMain {
 	
 	public User getOwner()
 	{
-		 owner=new UserImpl(user);
+		 owner=new OwnerImpl(user);
 		 return owner;
 	}
 	
