@@ -3,10 +3,11 @@ package gui.searchpanel;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class Project extends JPanel implements Comparable<Project> {
+public class Project extends JButton implements Comparable<Project> {
 	private String projectName;
 	private int notifications;
 	private String[] users;

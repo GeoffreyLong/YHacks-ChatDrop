@@ -3,10 +3,11 @@ package gui.searchpanel;
 import java.awt.Color;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class CreateChat extends JPanel{
+public class CreateChat extends JButton{
 	public CreateChat(){
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);
