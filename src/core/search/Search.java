@@ -7,7 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.dropbox.core.DbxException;
+
 import core.CoreMain;
+import core.init.InitConversation;
 import core.objects.SharedFolder;
 import core.objects.SharedFolderImpl;
 
@@ -61,6 +64,15 @@ public class Search {
 			if(file.getName().equals(".chat"))
 			{
 				chatFolders.add(new SharedFolderImpl(file.getParentFile()));
+			}
+		}
+		for(SharedFolder chat : chatFolders)
+		{
+			try {
+				InitConversation.create(chat);
+			} catch (DbxException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		}
 		return chatFolders;
