@@ -11,6 +11,7 @@ public class NewUserPanel extends JPanel implements ActionListener{
 	public NewUserPanel(){
 		setLayout(null);
 		setVisible(true);
+		setBounds(0,0,1100,700);
 		
 		JLabel welcomeLabel = new JLabel("<html>"
 				+ "Welcome to ChatterBox"
@@ -28,21 +29,21 @@ public class NewUserPanel extends JPanel implements ActionListener{
 				+ "If you would like to initialize this service click either of the buttons below"
 				+ "</p>"
 				+ "</html>");
-		welcomeLabel.setBounds(100,100,900,500);
+		welcomeLabel.setBounds(100,100,800,500);
 		
 		JButton online = new JButton("<html>"
 				+ "Sync all files"
 				+ "<br> (recommended) </html>");
-		online.setBounds(200,950,200,100);
+		online.setBounds(200,500,200,100);
 		online.addActionListener(this);
 		
-		JButton local = new JButton("<html>"
-				+ "Sync only local folders"
-				+ "</html>");
-		local.setBounds(500, 950, 200, 100);
+		JButton local = new JButton("Sync only local folders");
+		local.setBounds(500, 500, 200, 100);
 		local.addActionListener(this);
 		
 		add(welcomeLabel);
+		add(online);
+		add(local);
 	}
 
 	public void actionPerformed(ActionEvent e) {
