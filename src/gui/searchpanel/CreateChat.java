@@ -19,7 +19,4 @@ public class CreateChat extends JButton{
 		create.setBounds(25,3,120,40);
 		add(create);
 	}
-	public void setPreferredSize(){
-		
-	}
 }
