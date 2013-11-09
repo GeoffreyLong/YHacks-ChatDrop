@@ -30,9 +30,10 @@ public class InitiateConnection {
 	        	DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);
 	        	String authorizeUrl = webAuth.start();
 	        	//Make GUI for authorization
-	        	System.out.println("1. Go to: " + authorizeUrl);
-	        	System.out.println("2. Click Allow (you might have to log in first)");
-	        	System.out.println("3. Copy the authorization code.");
+	        	
+	        	gui.main.Frame frame = new gui.main.Frame();
+	        	String coder = frame.newUser(authorizeUrl);
+	        	
 	        	String code = new BufferedReader(new InputStreamReader(System.in)).readLine().trim();
 	        	DbxAuthFinish authFinish = webAuth.finish(code);
 	        	File authCodeFolder= new File("authCode");

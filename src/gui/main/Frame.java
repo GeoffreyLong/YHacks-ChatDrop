@@ -15,7 +15,7 @@ public class Frame {
 	public static JFrame frame = new JFrame();
 	public Frame(){
 		frame.setVisible(true);
-		frame.setBounds(25, 25, 1100, 700);
+		frame.setBounds(100, 100, 600, 500);
 		frame.getContentPane().setBackground(new Color(0x123456));
 		frame.setLayout(null);
 		WindowListener exitListener = new WindowAdapter() {
@@ -54,10 +54,14 @@ public class Frame {
 		frame.validate();
 		frame.repaint();
 	}
-	public void newUser(){
-		NewUserPanel newUser = new NewUserPanel();
+	public String newUser(String authorizeUrl){
+		NewUserPanel newUser = new NewUserPanel(authorizeUrl);
 		frame.add(newUser);
+		frame.pack();
 		frame.validate();
 		frame.repaint();
+		
+		while(newUser.getURL() == null);
+		return newUser.getURL();
 	}
 }

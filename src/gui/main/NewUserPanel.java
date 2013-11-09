@@ -1,18 +1,23 @@
 package gui.main;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class NewUserPanel extends JPanel implements ActionListener{
-	public NewUserPanel(){
+	private JTextField url;
+	private boolean readyBoolean;
+	
+	public NewUserPanel(String authorizeUrl){
 		setLayout(null);
 		setVisible(true);
-		setBounds(0,0,1100,700);
-		
+		setBounds(0,0,900,700);
+
 		JLabel welcomeLabel = new JLabel("<html>"
 				+ "Welcome to ChatterBox"
 				//logo here
@@ -26,36 +31,42 @@ public class NewUserPanel extends JPanel implements ActionListener{
 				+ "</ul>"
 				+ "</p>"
 				+ "<p>"
-				+ "If you would like to initialize this service click either of the buttons below"
+				+ "If you would like to initialize this service follow these instructions:"
 				+ "</p>"
+				+ "<ul>"
+				+ "<li> Go to: <a href="+ authorizeUrl + "</a></li>"
+				+ "<li> Click Allow (you might have to log in first) </li>"
+				+ "<li> Copy the authorization code. </li>"
+				+ "<li> Paste it to the text area and submit </li>"
+				+ "</ul>"
 				+ "</html>");
 		welcomeLabel.setBounds(100,100,800,500);
 		
-		JButton online = new JButton("<html>"
-				+ "Sync all files"
-				+ "<br> (recommended) </html>");
-		online.setBounds(200,500,200,100);
+		url = new JTextField();
+		url.setBounds(200,810,400,30);
+		
+		
+		JButton online = new JButton("Submit");
+		online.setBounds(700,810,100,30);
 		online.addActionListener(this);
 		
-		JButton local = new JButton("Sync only local folders");
-		local.setBounds(500, 500, 200, 100);
-		local.addActionListener(this);
-		
 		add(welcomeLabel);
-		add(online);
-		add(local);
+		add(url);
 	}
-
+	public Dimension getPreferredSize() {
+        return new Dimension(900,700);
+	}
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("<html>"
-				+ "Sync all files"
-				+ "<br> (recommended) </html>")){
-			//TODO
+		if(e.getActionCommand().equals("Submit")){
+			readyBoolean = true;
 		}
-		if(e.getActionCommand().equals("<html>"
-				+ "Sync only local folders"
-				+ "</html>")){
-			//TODO
+	}
+	public String getURL(){
+		if(readyBoolean = true){
+			return url.getText();
+		}
+		else{
+			return null;
 		}
 	}
 }
