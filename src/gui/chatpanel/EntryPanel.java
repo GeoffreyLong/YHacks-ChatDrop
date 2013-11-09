@@ -3,19 +3,21 @@ package gui.chatpanel;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.InputMap;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultCaret;
 
-public class EntryPanel extends JPanel{
+public class EntryPanel extends JPanel implements ActionListener{
 	final JTextArea entryArea;
 	private boolean isShifted = false;
 	
@@ -32,6 +34,11 @@ public class EntryPanel extends JPanel{
 		add(entryArea);
 		setVisible(true);
 		
+		JButton send = new JButton ("Send");
+		send.setBounds(580,120,70,35);
+		send.addActionListener(this);
+		add(send);
+		
         KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
         InputMap inputMap = entryArea.getInputMap();
         inputMap.put(enter, new AbstractAction() {
@@ -46,5 +53,10 @@ public class EntryPanel extends JPanel{
                 System.out.println("Shift+Enter released");
             }
         });
+	}
+
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
