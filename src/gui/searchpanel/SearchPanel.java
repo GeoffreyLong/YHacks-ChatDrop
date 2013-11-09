@@ -41,6 +41,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		newChat.setMaximumSize(new Dimension(270,50));
 		newChat.setMinimumSize(new Dimension(270,50));
 		newChat.setAlignmentX(Component.CENTER_ALIGNMENT);
+		
 		projectPanel.add(newChat);
 		
 		newChat.addActionListener(new ActionListener(){
@@ -49,9 +50,52 @@ public class SearchPanel extends JPanel implements DocumentListener {
 			}
 		});
 		
+		addProjects(files);
+		
+		searchField = new JTextField();
+		searchField.setBounds(5,5,285,50);
+		searchField.getDocument().addDocumentListener(this);
+		add(searchField);
+		add(scroll);
+		repaint();
+	}
+
+	public void addFiller(){
+        Dimension minSize = new Dimension(270, 10);
+        Dimension prefSize = new Dimension(270, 10);
+        Dimension maxSize = new Dimension(Short.MAX_VALUE, 10);
+        projectPanel.add(new Box.Filler(minSize, prefSize, maxSize));
+	}
+	
+	public void insertUpdate(DocumentEvent arg0) {
+		showProjects();
+	}
+	public void changedUpdate(DocumentEvent arg0) {
+	}
+	public void removeUpdate(DocumentEvent arg0) {
+		showProjects();
+	}
+	public void showProjects(){
+		String desired = searchField.getText();
+		
+		List<File> newFiles = new LinkedList<File>();
+		
+		projectPanel.removeAll();
+		projectPanel.add(newChat);
+		for (File file : files){
+			if (file.getName().length()>desired.length()){
+				if (file.getName().substring(0,desired.length()).contains(desired)){
+					newFiles.add(file);
+				}
+			}
+		}
+		addProjects(newFiles);
+		repaint();
+	}
+	public void addProjects(List<File> afiles){
 		projects = new LinkedList<Project>();
-		if (!files.isEmpty()){
-			for (File file : files){
+		if (!afiles.isEmpty()){
+			for (File file : afiles){
 				Project proj = new Project(file);
 				
 				proj.setPreferredSize(new Dimension(270,50));
@@ -70,41 +114,12 @@ public class SearchPanel extends JPanel implements DocumentListener {
 				projects.add(proj);
 			}
 			Collections.sort(projects);
-		}
-		
-		for (Project proj : projects){
-			addFiller();
-			projectPanel.add(proj);
-		}
-		searchField = new JTextField();
-		searchField.setBounds(5,5,285,50);
-		searchField.getDocument().addDocumentListener(this);
-		add(searchField);
-		add(scroll);
-		repaint();
-	}
-
-	public void addFiller(){
-        Dimension minSize = new Dimension(270, 10);
-        Dimension prefSize = new Dimension(270, 10);
-        Dimension maxSize = new Dimension(Short.MAX_VALUE, 10);
-        projectPanel.add(new Box.Filler(minSize, prefSize, maxSize));
-	}
-	
-	public void insertUpdate(DocumentEvent arg0) {
-		String desired = searchField.getText();
-		projectPanel.removeAll();
-		projectPanel.add(newChat);
-		for (Project project : projects){
-			if (project.getProjectName().substring(0,desired.length()).contains(desired)){
+			for (Project proj : projects){
 				addFiller();
-				projectPanel.add(project);
+				projectPanel.add(proj);
 			}
+			validate();
+			repaint();
 		}
-		repaint();
-	}
-	public void changedUpdate(DocumentEvent arg0) {
-	}
-	public void removeUpdate(DocumentEvent arg0) {
 	}
 }
