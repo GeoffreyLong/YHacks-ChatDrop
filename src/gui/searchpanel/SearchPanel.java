@@ -1,11 +1,14 @@
 package gui.searchpanel;
 
+import gui.main.Frame;
+
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +26,7 @@ import com.dropbox.core.DbxException;
 
 import core.display.MessageSorter;
 import core.init.InitConversation;
+import core.objects.Message;
 import core.objects.SharedFolder;
 import core.objects.SharedFolderImpl;
 
@@ -30,16 +34,16 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	final JTextField searchField;
 	//File root;
 	List<Project> projects;
-	List<File> files;
+	List<SharedFolder> files;
 	JPanel projectPanel = new JPanel();
 	CreateChat newChat = new CreateChat();
 	
-	public SearchPanel(List<File> files){
+	public SearchPanel(List<SharedFolder> list){
 		setLayout(null);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setBackground(new Color(0xBFCFEF));
 		
-		this.files = files;
+		this.files = list;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
 		JScrollPane scroll = new JScrollPane(projectPanel);
 		scroll.setBounds(5,60,290,590);
@@ -48,30 +52,32 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		newChat.setPreferredSize(new Dimension(270,50));
 		newChat.setMaximumSize(new Dimension(270,50));
 		newChat.setMinimumSize(new Dimension(270,50));
-		newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/CreateButton.png")));  
+		/*newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/CreateButton.png")));  
 		newChat.setBorderPainted(false);  
 		newChat.setFocusPainted(false);  
 		newChat.setContentAreaFilled(false);  
-		newChat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/ButtonPressed.png")));
+		newChat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/ButtonPressed.png")));*/
 		newChat.setAlignmentX(Component.CENTER_ALIGNMENT);
 		newChat.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				java.io.File file = newChat.getFile();
+				ArrayList list = new ArrayList<Message>();
 				SharedFolder a = new SharedFolderImpl(file);
+				MessageSorter messages = null;
 				try {
 					InitConversation.create(a);
-					MessageSorter messages = new MessageSorter(a);
-					messages.getMessages(10);
+					messages = new MessageSorter(a);
 				} catch (DbxException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				Frame.initChat(messages, a);
 			}
 		});
 		
 		projectPanel.add(newChat);
 		
-		addProjects(files);
+		addProjects(list);
 		
 		searchField = new JTextField();
 		searchField.setBounds(5,5,290,50);
@@ -99,13 +105,13 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	public void showProjects(){
 		String desired = searchField.getText();
 		
-		List<File> newFiles = new LinkedList<File>();
+		List<SharedFolder> newFiles = new LinkedList<SharedFolder>();
 		
 		projectPanel.removeAll();
 		projectPanel.add(newChat);
-		for (File file : files){
-			if (file.getName().length()>desired.length()){
-				if (file.getName().substring(0,desired.length()).contains(desired)){
+		for (SharedFolder file : files){
+			if (file.getTopLevel().getName().length()>desired.length()){
+				if (file.getTopLevel().getName().substring(0,desired.length()).contains(desired)){
 					newFiles.add(file);
 				}
 			}
@@ -113,11 +119,11 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		addProjects(newFiles);
 		repaint();
 	}
-	public void addProjects(List<File> afiles){
+	public void addProjects(List<SharedFolder> afiles){
 		projects = new LinkedList<Project>();
 		if (!afiles.isEmpty()){
-			for (File file : afiles){
-				Project proj = new Project(file);
+			for (SharedFolder file : afiles){
+				final Project proj = new Project(file);
 				
 				proj.setPreferredSize(new Dimension(270,50));
 				proj.setMaximumSize(new Dimension(270,50));
@@ -126,11 +132,8 @@ public class SearchPanel extends JPanel implements DocumentListener {
 				
 				proj.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
-						//call to method which will receive the messages
-						//get back the arraylist of messages
-						//core.objects.Message[] messages = getallmessages
-						//gui.main.Frame.initChat(messages);
-						
+						MessageSorter messages = new MessageSorter(proj.getSharedFolder());
+						Frame.initChat(messages, proj.getSharedFolder());
 					}
 				});
 				projects.add(proj);

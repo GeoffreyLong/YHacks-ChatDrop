@@ -17,11 +17,22 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.text.DefaultCaret;
 
+import org.joda.time.DateTime;
+
+import com.dropbox.core.DbxException;
+
+import core.display.MessageSorter;
+import core.objects.SharedFolder;
+
 public class EntryPanel extends JPanel implements ActionListener{
 	final JTextArea entryArea;
 	private boolean isShifted = false;
+	private SharedFolder sharedFolder;
+	private MessageSorter messages;
 	
-	public EntryPanel(){
+	public EntryPanel(final SharedFolder sharedFolder, final MessageSorter messages){
+		this.sharedFolder = sharedFolder;
+		this.messages = messages;
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		entryArea = new JTextArea();
 		setBackground(new Color(0xBFCFEF));
@@ -43,14 +54,19 @@ public class EntryPanel extends JPanel implements ActionListener{
         InputMap inputMap = entryArea.getInputMap();
         inputMap.put(enter, new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Enter released");
+            	DateTime date = new DateTime();
+            	
+            	core.objects.Message mess = new core.objects.MessageImpl(gui.main.Frame.name, entryArea.getText(), date);
+            	new core.io.ChatWriter(sharedFolder, mess);
+            	gui.main.Frame.chatQuickUpdate(messages, sharedFolder);
+            	entryArea.setText("");
             }
         });
 
         entryArea.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK, true), "Shenter");
         entryArea.getActionMap().put("Shenter", new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-                System.out.println("Shift+Enter released");
+               // entryArea.append(text+"\n");
             }
         });
 	}

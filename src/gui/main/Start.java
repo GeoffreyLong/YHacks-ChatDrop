@@ -6,7 +6,7 @@ public class Start {
 		try{
 			frame = new Frame();
 			core.search.Search obj = new core.search.Search();
-			frame.initSearch(obj.getAllSubdirectoriesOfRoot());
+			frame.initSearch(obj.getCurrentConversations());
 			frame.initEmptyChat();
 		}catch(Exception e){
 			e.printStackTrace();
