@@ -1,5 +1,6 @@
 package core.read;
 
-public class ChatReader {
 
+
+public class ChatReader {
 }
