@@ -3,11 +3,22 @@ package core.init;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.nio.charset.StandardCharsets;
+import java.util.Calendar;
+
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObjectBuilder;
+import javax.json.JsonValue;
+import javax.json.JsonWriter;
+
+import org.joda.time.DateTime;
+import org.joda.time.JodaTimePermission;
+
+import com.fasterxml.jackson.core.JsonFactory;
 
 import core.CoreMain;
 import core.exceptions.NotAFolderException;
@@ -16,7 +27,7 @@ import core.objects.User;
 
 public class InitConversation implements Serializable
 {
-	/**
+	/** InitConversation
 	 * 
 	 */
 	private static final long serialVersionUID = 6656076942650832481L;
@@ -53,10 +64,18 @@ public class InitConversation implements Serializable
 		else
 		{
 			try {
-				logFile.createNewFile();
+				DateTime date = new DateTime();
+				
+				JsonObjectBuilder top = Json.createObjectBuilder();
+				top.add("displayName", owner.getUserDisplayName());
+				top.add("joinDate", date.toString());
+				JsonArrayBuilder messageArray = Json.createArrayBuilder();
+				top.add("messages", messageArray);
+
 				BufferedWriter write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile), StandardCharsets.UTF_8));
+				JsonWriter jsonWrite = Json.createWriter(write);
 				
-				
+				jsonWrite.writeObject(top.build());				
 				
 			} catch (IOException e) {
 				

@@ -6,7 +6,6 @@ public class UserTemp {
 	
 	public UserTemp(SharedFolder folder)
 	{
-		
 	}
 
 }
