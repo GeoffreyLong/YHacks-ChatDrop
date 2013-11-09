@@ -54,7 +54,14 @@ public class Search {
 	public List<SharedFolder> getCurrentConversations()
 	{
 		List<File> allFolders = getAllSubDirectoriesOfRoot();
-		
+		List<File> chatFolders = new ArrayList<File>();
+		for(File file : allFolders)
+		{
+			if(file.getName().equals(".chat"))
+			{
+				chatFolders.add(file.getParentFile());
+			}
+		}
 		
 		
 		
@@ -64,7 +71,6 @@ public class Search {
 	}
 	
 	private List<File> getAllSubDirectoriesOfRoot() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

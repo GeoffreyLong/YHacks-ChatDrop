@@ -8,9 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -27,16 +24,19 @@ import core.objects.SharedFolder;
 
 public class ChatReader {
 	private SharedFolder projectName;
-	public Map<String,ArrayList<Message>> compileMessages() throws FileNotFoundException, IOException {
+	public ChatReader(SharedFolder projName){
+		projectName=projName;
+	}
+	public ArrayList<ArrayList<Message>> compileMessages() throws FileNotFoundException, IOException {
 		File workingDir=projectName.getChatFolder();
 		ArrayList<File> files = new ArrayList<File>();
 		for(File f: workingDir.listFiles()){
 			if(f.toString().contains(".json")){
-				//fix so no collisions with users own json files.
+				
 				files.add(f);
 			}
 		}
-		Map<String,ArrayList<Message>> compiled= new HashMap<String,ArrayList<Message>>();
+		ArrayList<ArrayList<Message>> compiled= new ArrayList<ArrayList<Message>>();
 		for(File f : files){
 			BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream (f),StandardCharsets.UTF_8));
 			JsonReader jr =  Json.createReader(read);
@@ -46,10 +46,10 @@ public class ChatReader {
 			ArrayList<Message> messages = new ArrayList<Message>();
 			for(int i=0;i<ja.size();i++){
 				JsonObject singleMessage = ja.getJsonObject(i);
-				Message m = new MessageImpl(singleMessage.get("message").toString(),new DateTime(singleMessage.get("date").toString()));
+				Message m = new MessageImpl(name,singleMessage.get("message").toString(),new DateTime(singleMessage.get("date").toString()));
 				 messages.add(m);
 			}
-			compiled.put(name,messages);
+			compiled.add(messages);
 			read.close();
 		}
 		return compiled;
