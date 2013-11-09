@@ -31,7 +31,7 @@ public class Frame {
 	
 	public Frame(){
 		frame.setVisible(true);
-		frame.setBounds(25, 25, 1200, 700);
+		frame.setBounds(25, 25, 1100, 700);
 		frame.getContentPane().setBackground(new Color(0x123456));
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setLayout(null);
@@ -67,6 +67,7 @@ public class Frame {
 		frame.repaint();
 	}
 	public static void initEmptyChat(){
+		welcomePanel();
 		empty = new gui.chatpanel.EmptyChat();
 		empty.setBounds(500,300,330,100);
 		frame.add(empty);
@@ -81,12 +82,14 @@ public class Frame {
 		updateChat(chatPanel, entryPanel);
 	}
 	public static void initChat(MessageSorter messages, SharedFolder sharedFolder){
+		welcomePanel();
 		empty.setVisible(false);
 		chatQuickUpdate(messages, sharedFolder);
 		Timer timer = new Timer(5000, new gui.chatpanel.Chat(messages, sharedFolder));
 		timer.start();
 	}
 	public static void updateChat(ChatPanel chatPanel, EntryPanel entryPanel){
+		welcomePanel();
 		frame.add(chatPanel);
 		frame.add(entryPanel);
 		frame.validate();
@@ -115,5 +118,12 @@ public class Frame {
 		initEmptyChat();
 		
 		return newUser.getURL();
+	}
+	public static void welcomePanel(){
+		WelcomePanel welcome = new WelcomePanel();
+		welcome.setBounds(310,5,780,55);
+		frame.add(welcome);
+		frame.validate();
+		frame.repaint();
 	}
 }

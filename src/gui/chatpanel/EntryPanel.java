@@ -48,7 +48,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 		setVisible(true);
 		
 		JButton send = new JButton ("Send");
-		send.setBounds(580,120,70,35);
+		send.setBounds(670,100,100,50);
 		send.addActionListener(this);
 		add(send);
 		
@@ -56,23 +56,7 @@ public class EntryPanel extends JPanel implements ActionListener{
         InputMap inputMap = entryArea.getInputMap();
         inputMap.put(enter, new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-            	DateTime date = new DateTime();
             	
-            	core.objects.Message mess = new core.objects.MessageImpl(gui.main.Frame.name, entryArea.getText(), date);
-            	try {
-					new core.io.ChatWriter(sharedFolder, mess);
-				} catch (FileNotFoundException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (DbxException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-            	gui.main.Frame.chatQuickUpdate(messages, sharedFolder);
-            	entryArea.setText("");
             }
         });
 
@@ -84,8 +68,29 @@ public class EntryPanel extends JPanel implements ActionListener{
         });
 	}
 
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e) {
+		if (e.getActionCommand().equals("Send")){
+			pipeData();
+		}
+	}
+	
+	public void pipeData(){
+		DateTime date = new DateTime();
+    	
+    	core.objects.Message mess = new core.objects.MessageImpl(gui.main.Frame.name, entryArea.getText(), date);
+    	try {
+			new core.io.ChatWriter(sharedFolder, mess);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (DbxException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	gui.main.Frame.chatQuickUpdate(messages, sharedFolder);
+    	entryArea.setText("");
 	}
 }

@@ -74,7 +74,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 				Frame.initChat(messages, a);
 			}
 		});
-		
+		addFiller();
 		projectPanel.add(newChat);
 		
 		addProjects(list);
