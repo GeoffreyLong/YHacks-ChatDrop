@@ -15,8 +15,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
+import core.objects.Message;
+
 public class ChatPanel extends JPanel implements AdjustmentListener{
 	JScrollBar vertical;
+	static JPanel innerPanel;
 	
 	public ChatPanel(core.objects.Message[] messages){
 		if (messages == null){
@@ -27,7 +30,7 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 		else{
 			removeAll();
 			setBorder(BorderFactory.createLineBorder(Color.black));
-			JPanel innerPanel = new JPanel();
+			innerPanel = new JPanel();
 			innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS)); 
 			for (core.objects.Message message : messages){
 				MessagePanel messagePanel = new MessagePanel(message);
@@ -54,5 +57,15 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 		if (vertical.getValue() == vertical.getMinimum()){
 			//TODO
 		}
+	}
+	
+	public static void addMessage(Message message){
+		MessagePanel messagePanel = new MessagePanel(message);
+		int ySize = messagePanel.getYSize();
+		messagePanel.setPreferredSize(new Dimension(270,ySize));
+		messagePanel.setMaximumSize(new Dimension(270,ySize));
+		messagePanel.setMinimumSize(new Dimension(270,ySize));
+		messagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+		innerPanel.add(messagePanel);
 	}
 }
