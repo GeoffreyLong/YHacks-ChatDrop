@@ -8,10 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 public class ChatPanel extends JPanel {
-	public ChatPanel(){
+	public ChatPanel(core.objects.Message[] messages){
 		setBorder(BorderFactory.createLineBorder(Color.black));
-	}
-	public void panelInit(core.objects.Message[] messages){
 		JPanel innerPanel = new JPanel();
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS)); 
 		for (core.objects.Message message : messages){
