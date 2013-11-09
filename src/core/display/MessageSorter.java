@@ -32,7 +32,7 @@ public class MessageSorter {
 		for(int i = 0; i < amount ; i++)
 		{
 			int mostRecent = -1;
-			Message toReturn = new MessageImpl();
+			Message toReturn = null;
 			for(int j = 0; j < users; j++)
 			{
 				if(arrayPos.get(j) != -1)
