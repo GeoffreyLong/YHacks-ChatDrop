@@ -61,7 +61,8 @@ public class SearchPanel extends JPanel implements DocumentListener {
 				
 				proj.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
-						//Method call to get messages from folder
+						//call to method which will receive the messages
+						//get back the arraylist of messages
 					}
 				});
 				projects.add(proj);
