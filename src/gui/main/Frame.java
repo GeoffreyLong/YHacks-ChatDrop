@@ -29,9 +29,17 @@ public class Frame {
 	}
 	public void initSearch(){
 		gui.searchpanel.SearchPanel searchPanel = new gui.searchpanel.SearchPanel();
+		searchPanel.setBounds(5,5,295,660);
 		frame.add(searchPanel);
 	}
 	public void initChat(){
 		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel();
+		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel();
+		chatPanel.setBounds(305,5,785,490);
+		entryPanel.setBounds(305,500,785,165);
+		frame.add(chatPanel);
+		frame.add(entryPanel);
+		frame.validate();
+		frame.repaint();
 	}
 }
