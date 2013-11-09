@@ -8,7 +8,7 @@ public class MessagePanel extends JPanel{
 	public MessagePanel(core.objects.Message message){
 		setLayout(null);
 		JLabel userName = new JLabel(message.getUserName());
-		JLabel date = new JLabel(message.getDate());
+		JLabel date = new JLabel(message.getDate().toString());
 		JLabel text = new JLabel(message.getMessageText());
 		userName.setBounds(5,5,100,20);
 		date.setBounds(5, 30, 100, 20);

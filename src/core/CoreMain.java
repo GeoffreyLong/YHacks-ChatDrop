@@ -4,7 +4,6 @@ import java.io.File;
 
 import com.dropbox.core.DbxClient;
 
-import core.init.UserTemp;
 import core.objects.User;
 
 public class CoreMain {
