@@ -5,6 +5,9 @@ public class Start {
 		Frame frame;
 		try{
 			frame = new Frame();
+			core.search.Search obj = new core.search.Search();
+			frame.initSearch(obj.getAllSubdirectoriesOfRoot());
+			frame.initChat();
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("GUI could not instantiate");
