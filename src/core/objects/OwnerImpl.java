@@ -15,4 +15,7 @@ public class OwnerImpl implements User {
 	public String getUserDisplayName() throws DbxException{
 		return owner.getAccountInfo().displayName;
 	}
+	public DbxClient getDbxClient(){
+		return owner;
+	}
 }
