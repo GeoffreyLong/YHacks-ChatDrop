@@ -1,7 +1,9 @@
 package core.objects;
 
+import org.joda.time.DateTime;
+
 public interface Message {
 	public String getUserName();
-	public String getDate();
+	public DateTime getDate();
 	public String getMessageText();
 }
