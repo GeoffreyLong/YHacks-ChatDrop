@@ -1,5 +1,6 @@
 package gui.main;
 
+import java.awt.Color;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
@@ -9,11 +10,13 @@ import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+
 public class Frame {
 	public static JFrame frame = new JFrame();
 	public Frame(){
 		frame.setVisible(true);
 		frame.setBounds(25, 25, 1100, 700);
+		frame.getContentPane().setBackground(new Color(0x123456));
 		frame.setLayout(null);
 		WindowListener exitListener = new WindowAdapter() {
             @Override
@@ -44,8 +47,8 @@ public class Frame {
 	public static void initChat(core.objects.Message[] messages){
 		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(messages);
 		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel();
-		chatPanel.setBounds(310,5,785,490);
-		entryPanel.setBounds(310,500,785,165);
+		chatPanel.setBounds(310,65,780,430);
+		entryPanel.setBounds(310,500,780,165);
 		frame.add(chatPanel);
 		frame.add(entryPanel);
 		frame.validate();

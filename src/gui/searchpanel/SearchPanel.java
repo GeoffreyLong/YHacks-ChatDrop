@@ -30,6 +30,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	public SearchPanel(List<File> files){
 		setLayout(null);
 		setBorder(BorderFactory.createLineBorder(Color.black));
+		setBackground(new Color(0xBFCFEF));
 		
 		this.files = files;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
@@ -40,7 +41,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		newChat.setPreferredSize(new Dimension(270,50));
 		newChat.setMaximumSize(new Dimension(270,50));
 		newChat.setMinimumSize(new Dimension(270,50));
-		newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/Button.png")));  
+		newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/CreateButton.png")));  
 		newChat.setBorderPainted(false);  
 		newChat.setFocusPainted(false);  
 		newChat.setContentAreaFilled(false);  

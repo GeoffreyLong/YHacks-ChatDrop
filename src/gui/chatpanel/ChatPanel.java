@@ -24,11 +24,11 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 	
 	public ChatPanel(core.objects.Message[] messages){
 		removeAll();
+		innerPanel = new JPanel();
 		innerPanel.removeAll();
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		innerPanel = new JPanel();
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS)); 
-		for (core.objects.Message message : messages){
+		/*for (core.objects.Message message : messages){
 			MessagePanel messagePanel = new MessagePanel(message);
 			int ySize = messagePanel.getYSize();
 			messagePanel.setPreferredSize(new Dimension(270,ySize));
@@ -36,7 +36,7 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 			messagePanel.setMinimumSize(new Dimension(270,ySize));
 			messagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
 			innerPanel.add(messagePanel);
-		}
+		}*/
 		JScrollPane scroll = new JScrollPane(innerPanel);
 		scroll.setBounds(5,5,775, 480);
 		

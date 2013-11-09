@@ -1,6 +1,7 @@
 package gui.chatpanel;
 
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,9 +22,10 @@ public class EntryPanel extends JPanel{
 	public EntryPanel(){
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		entryArea = new JTextArea();
+		setBackground(new Color(0xBFCFEF));
 		DefaultCaret caret = (DefaultCaret)entryArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-		entryArea.setBounds(5,5,775,155);
+		entryArea.setBounds(5,5,650,155);
 		entryArea.setLineWrap(true);
 		entryArea.setWrapStyleWord(true);
 		setLayout(null);
@@ -33,14 +35,14 @@ public class EntryPanel extends JPanel{
         KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
         InputMap inputMap = entryArea.getInputMap();
         inputMap.put(enter, new AbstractAction() {
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 System.out.println("Enter released");
             }
         });
 
         entryArea.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK, true), "Shenter");
         entryArea.getActionMap().put("Shenter", new AbstractAction() {
-            public void actionPerformed(ActionEvent ae) {
+            public void actionPerformed(ActionEvent e) {
                 System.out.println("Shift+Enter released");
             }
         });
