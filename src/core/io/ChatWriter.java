@@ -36,7 +36,7 @@ public class ChatWriter {
 		user=client;
 	}
 	
-	public ChatWriter(SharedFolder name, Message message)
+	public ChatWriter(SharedFolder name, Message message) throws FileNotFoundException, DbxException, IOException
 	{
 		this(name, CoreMain.get().getOwner().getDbxClient());
 		this.writeTo(message.getMessageText());

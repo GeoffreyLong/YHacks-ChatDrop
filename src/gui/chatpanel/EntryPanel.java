@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
@@ -57,7 +59,18 @@ public class EntryPanel extends JPanel implements ActionListener{
             	DateTime date = new DateTime();
             	
             	core.objects.Message mess = new core.objects.MessageImpl(gui.main.Frame.name, entryArea.getText(), date);
-            	new core.io.ChatWriter(sharedFolder, mess);
+            	try {
+					new core.io.ChatWriter(sharedFolder, mess);
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (DbxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
             	gui.main.Frame.chatQuickUpdate(messages, sharedFolder);
             	entryArea.setText("");
             }

@@ -27,7 +27,7 @@ public class MessageSorter {
 		this.allMessages = messages;
 		arrayPos = new ArrayList<Integer>(allMessages.size());
 		for(int i = 0; i < allMessages.size(); i++)
-			arrayPos.set(i, allMessages.get(i).size()-1);
+			arrayPos.add(i, allMessages.get(i).size()-1);
 	}
 	
 	public ArrayList<Message> getMessages(int amount)
