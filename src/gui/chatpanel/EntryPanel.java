@@ -1,16 +1,23 @@
 package gui.chatpanel;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
+import javax.swing.InputMap;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.text.DefaultCaret;
 
-public class EntryPanel extends JPanel implements KeyListener{
+public class EntryPanel extends JPanel{
 	final JTextArea entryArea;
+	private boolean isShifted = false;
+	
 	public EntryPanel(){
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		entryArea = new JTextArea();
@@ -22,18 +29,20 @@ public class EntryPanel extends JPanel implements KeyListener{
 		setLayout(null);
 		add(entryArea);
 		setVisible(true);
-	}
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
 		
+        KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
+        InputMap inputMap = entryArea.getInputMap();
+        inputMap.put(enter, new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Enter released");
+            }
+        });
+
+        entryArea.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK, true), "Shenter");
+        entryArea.getActionMap().put("Shenter", new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Shift+Enter released");
+            }
+        });
 	}
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
