@@ -32,9 +32,10 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		list = new LinkedList<String>();
 		//list = root.list();
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
-		newChat.setPreferredSize(new Dimension(280,50));
-		newChat.setMaximumSize(new Dimension(275,50));
-		newChat.setAlignmentY(Component.CENTER_ALIGNMENT);
+		newChat.setPreferredSize(new Dimension(270,50));
+		newChat.setMaximumSize(new Dimension(270,50));
+		newChat.setMinimumSize(new Dimension(270,50));
+		newChat.setAlignmentX(Component.CENTER_ALIGNMENT);
 		projectPanel.add(newChat);
 		JScrollPane scroll = new JScrollPane(projectPanel);
 		scroll.setBounds(5,60,280,580);
@@ -49,6 +50,12 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		if (projects != (null)){
 			for (String string : list){
 				Project proj = new Project(string);
+				
+				proj.setPreferredSize(new Dimension(270,50));
+				proj.setMaximumSize(new Dimension(270,50));
+				proj.setMinimumSize(new Dimension(270,50));
+				proj.setAlignmentX(Component.CENTER_ALIGNMENT);
+				
 				proj.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e) {
 						//TODO 
