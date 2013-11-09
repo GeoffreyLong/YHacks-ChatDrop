@@ -63,6 +63,8 @@ public class SearchPanel extends JPanel implements DocumentListener {
 					public void actionPerformed(ActionEvent e) {
 						//call to method which will receive the messages
 						//get back the arraylist of messages
+						//core.objects.Message[] messages = getallmessages
+						//gui.main.Frame.initChat(messages);
 					}
 				});
 				projects.add(proj);
