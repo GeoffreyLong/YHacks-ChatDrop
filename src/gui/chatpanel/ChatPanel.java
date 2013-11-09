@@ -3,14 +3,21 @@ package gui.chatpanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 
-public class ChatPanel extends JPanel {
+public class ChatPanel extends JPanel implements AdjustmentListener{
+	JScrollBar vertical;
+	
 	public ChatPanel(core.objects.Message[] messages){
 		if (messages == null){
 			JLabel welcomeLabel = new JLabel("Welcome to Chatterbox, Choose a chat to begin");
@@ -33,7 +40,19 @@ public class ChatPanel extends JPanel {
 			}
 			JScrollPane scroll = new JScrollPane(innerPanel);
 			scroll.setBounds(5,5,775, 480);
+			
+			vertical = scroll.getVerticalScrollBar();
+			vertical.setValue( vertical.getMaximum() );
+			
+			vertical.addAdjustmentListener(this);
+			
 			add(scroll);
+		}
+	}
+	
+	public void adjustmentValueChanged(AdjustmentEvent arg0) {
+		if (vertical.getValue() == vertical.getMinimum()){
+			//TODO
 		}
 	}
 }
