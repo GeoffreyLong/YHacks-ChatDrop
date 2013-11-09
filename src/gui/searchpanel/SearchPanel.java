@@ -40,6 +40,11 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		newChat.setPreferredSize(new Dimension(270,50));
 		newChat.setMaximumSize(new Dimension(270,50));
 		newChat.setMinimumSize(new Dimension(270,50));
+		newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/Button.png")));  
+		newChat.setBorderPainted(false);  
+		newChat.setFocusPainted(false);  
+		newChat.setContentAreaFilled(false);  
+		newChat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/ButtonPressed.png")));
 		newChat.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		projectPanel.add(newChat);
