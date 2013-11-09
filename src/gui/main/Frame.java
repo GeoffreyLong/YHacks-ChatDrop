@@ -33,10 +33,11 @@ public class Frame {
 		frame.add(searchPanel);
 	}
 	public void initChat(){
-		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel();
+		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(null);
 		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel();
 		chatPanel.setBounds(305,5,785,490);
 		entryPanel.setBounds(305,500,785,165);
+		entryPanel.setVisible(false);
 		frame.add(chatPanel);
 		frame.add(entryPanel);
 		frame.validate();
