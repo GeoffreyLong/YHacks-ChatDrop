@@ -51,9 +51,9 @@ public class Search {
 		return directories;
 	}
 	
-	public List<SharedFolder> getCurrentConversations()
+	public List<File> getCurrentConversations()
 	{
-		List<File> allFolders = getAllSubDirectoriesOfRoot();
+		List<File> allFolders = getAllSubdirectoriesOfRoot();
 		List<File> chatFolders = new ArrayList<File>();
 		for(File file : allFolders)
 		{
@@ -62,22 +62,13 @@ public class Search {
 				chatFolders.add(file.getParentFile());
 			}
 		}
-		
-		
-		
-		
-		
-		return null;
-	}
-	
-	private List<File> getAllSubDirectoriesOfRoot() {
-		return null;
+		return chatFolders;
 	}
 
 	public static void main(String[] args) throws IOException
 	{
 		Search sMain = new Search();
-		List<File> subs = sMain.getAllSubdirectoriesOfRoot();
+		List<File> subs = sMain.getCurrentConversations();
 		for(File f : subs)
 		{
 			System.out.println(f.getAbsolutePath());
