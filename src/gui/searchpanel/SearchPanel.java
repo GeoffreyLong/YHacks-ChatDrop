@@ -49,7 +49,8 @@ public class SearchPanel extends JPanel implements DocumentListener {
 			}
 		});
 		
-		if (projects != (null)){
+		projects = new LinkedList<Project>();
+		if (!list.isEmpty()){
 			for (String string : list){
 				Project proj = new Project(string);
 				
@@ -68,11 +69,16 @@ public class SearchPanel extends JPanel implements DocumentListener {
 			Collections.sort(projects);
 		}
 		
+		for (Project proj : projects){
+			addFiller();
+			projectPanel.add(proj);
+		}
 		searchField = new JTextField();
 		searchField.setBounds(5,5,285,50);
 		searchField.getDocument().addDocumentListener(this);
 		add(searchField);
 		add(scroll);
+		repaint();
 	}
 
 	public void addFiller(){
@@ -86,12 +92,10 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		String desired = searchField.getText();
 		projectPanel.removeAll();
 		projectPanel.add(newChat);
-		if (projects != null){
-			for (Project project : projects){
-				if (project.getProjectName().substring(0,desired.length()).contains(desired)){
-					addFiller();
-					projectPanel.add(project);
-				}
+		for (Project project : projects){
+			if (project.getProjectName().substring(0,desired.length()).contains(desired)){
+				addFiller();
+				projectPanel.add(project);
 			}
 		}
 		repaint();
