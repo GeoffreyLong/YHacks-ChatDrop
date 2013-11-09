@@ -45,7 +45,9 @@ public class CoreMain {
 	
 	public User getOwner()
 	{
+
 		 owner=new OwnerImpl(user);
+
 		 return owner;
 	}
 	
