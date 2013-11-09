@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 
 public class CreateChat extends JButton{
 	public CreateChat(){
-		Dimension prefSize = new Dimension(5, 100);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);
+		
 		//TODO add a + button like a nice green plus in a little subpanel like fb or whatever
 		JLabel create = new JLabel("Create A New Chat");
 		create.setBounds(25,3,120,40);
