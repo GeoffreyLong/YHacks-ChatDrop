@@ -16,7 +16,7 @@ public class Project extends JButton implements Comparable<Project> {
 	
 	Project(File file){
 		setLayout(null);
-		setBounds(5,5,275,45);
+		setBounds(5,5,260,45);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		
 		setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/Button.png")));  
