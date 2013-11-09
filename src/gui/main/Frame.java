@@ -3,6 +3,8 @@ package gui.main;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -25,8 +27,8 @@ public class Frame {
         };
         frame.addWindowListener(exitListener);
 	}
-	public void initSearch(){
-		gui.searchpanel.SearchPanel searchPanel = new gui.searchpanel.SearchPanel();
+	public void initSearch(List<File> list){
+		gui.searchpanel.SearchPanel searchPanel = new gui.searchpanel.SearchPanel(list);
 		searchPanel.setBounds(5,5,295,660);
 		frame.add(searchPanel);
 	}
