@@ -16,7 +16,7 @@ public class CreateChat extends JButton{
 		
 		//TODO add a + button like a nice green plus in a little subpanel like fb or whatever
 		JLabel create = new JLabel("Create A New Chat");
-		create.setBounds(25,3,120,40);
+		create.setBounds(25,3,180,40);
 		add(create);
 	}
 }
