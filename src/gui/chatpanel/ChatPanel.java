@@ -23,36 +23,29 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 	public static JPanel innerPanel;
 	
 	public ChatPanel(core.objects.Message[] messages){
-		if (messages == null){
-			JLabel welcomeLabel = new JLabel("Welcome to Chatterbox, Choose a chat to begin");
-			welcomeLabel.setBounds(100,100,300,300);
-			add(welcomeLabel);
+		removeAll();
+		innerPanel.removeAll();
+		setBorder(BorderFactory.createLineBorder(Color.black));
+		innerPanel = new JPanel();
+		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS)); 
+		for (core.objects.Message message : messages){
+			MessagePanel messagePanel = new MessagePanel(message);
+			int ySize = messagePanel.getYSize();
+			messagePanel.setPreferredSize(new Dimension(270,ySize));
+			messagePanel.setMaximumSize(new Dimension(270,ySize));
+			messagePanel.setMinimumSize(new Dimension(270,ySize));
+			messagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+			innerPanel.add(messagePanel);
 		}
-		else{
-			removeAll();
-			innerPanel.removeAll();
-			setBorder(BorderFactory.createLineBorder(Color.black));
-			innerPanel = new JPanel();
-			innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS)); 
-			for (core.objects.Message message : messages){
-				MessagePanel messagePanel = new MessagePanel(message);
-				int ySize = messagePanel.getYSize();
-				messagePanel.setPreferredSize(new Dimension(270,ySize));
-				messagePanel.setMaximumSize(new Dimension(270,ySize));
-				messagePanel.setMinimumSize(new Dimension(270,ySize));
-				messagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-				innerPanel.add(messagePanel);
-			}
-			JScrollPane scroll = new JScrollPane(innerPanel);
-			scroll.setBounds(5,5,775, 480);
-			
-			vertical = scroll.getVerticalScrollBar();
-			vertical.setValue( vertical.getMaximum() );
-			
-			vertical.addAdjustmentListener(this);
-			
-			add(scroll);
-		}
+		JScrollPane scroll = new JScrollPane(innerPanel);
+		scroll.setBounds(5,5,775, 480);
+		
+		vertical = scroll.getVerticalScrollBar();
+		vertical.setValue( vertical.getMaximum() );
+		
+		vertical.addAdjustmentListener(this);
+		
+		add(scroll);
 	}
 	
 	public void adjustmentValueChanged(AdjustmentEvent arg0) {
