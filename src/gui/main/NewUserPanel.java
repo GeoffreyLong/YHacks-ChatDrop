@@ -101,8 +101,6 @@ public class NewUserPanel extends JPanel implements ActionListener{
 		}
 	}
 	public String getURL(){
-		this.setFocusable(true);
-		url.requestFocus();
 		if(readyBoolean){
 			return url.getText();
 		}
