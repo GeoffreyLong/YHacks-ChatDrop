@@ -31,6 +31,7 @@ public class ChatListener {
 		owner = new OwnerImpl(c);
 		DbxDelta<DbxEntry> dd= c.getDelta(cursor);
 		cursor=dd.cursor;
+		System.out.println(cursor);
 		
 		//dd= c.getDelta(cursor);
 	//	cursor=dd.cursor;
