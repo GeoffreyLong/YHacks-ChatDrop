@@ -39,7 +39,6 @@ public class SharedFolderImpl implements SharedFolder{
 			e.printStackTrace();
 		}
 	}
-
 	public File getTopLevel(){
 		return topLevel;
 	}

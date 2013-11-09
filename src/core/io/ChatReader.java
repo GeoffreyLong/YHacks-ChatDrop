@@ -61,7 +61,10 @@ public class ChatReader {
 			ArrayList<Message> messages = new ArrayList<Message>();
 			for(int i=0;i<ja.size();i++){
 				JsonObject singleMessage = ja.getJsonObject(i);
-				Message m = new MessageImpl(name,singleMessage.get("message").toString(),new DateTime(singleMessage.get("date").toString()));
+				
+				String s = singleMessage.getString("date");//.toString().replaceAll("\"", "");
+				System.out.println(s);
+				Message m = new MessageImpl(name,singleMessage.getString("message"),new DateTime(s));
 				 messages.add(m);
 			}
 			compiled.add(messages);
