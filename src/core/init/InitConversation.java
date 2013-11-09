@@ -29,7 +29,7 @@ public class InitConversation implements Serializable
 	 */
 	private static final long serialVersionUID = 6656076942650832481L;
 
-	public InitConversation(SharedFolder folder) throws DbxException
+	public static void create(SharedFolder folder) throws DbxException
 	{
 		File chat;
 		if((chat = folder.getChatFolder()) != null)

@@ -16,7 +16,7 @@ public class TestIO {
 	public static void main(String[] args) throws DbxException, IOException, FileNotFoundException{
 		File f = new File("HelloWorld");
 		SharedFolder s = new SharedFolderImpl(f);
-		InitConversation ic = new InitConversation(s);
+		InitConversation.create(s);
 		ChatReader cr = new ChatReader(s);
 		ChatWriter cw = new ChatWriter(s,InitiateConnection.authenticate());
 		cw.writeTo("Hello World");

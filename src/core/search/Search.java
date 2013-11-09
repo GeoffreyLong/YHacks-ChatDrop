@@ -9,6 +9,7 @@ import java.util.List;
 
 import core.CoreMain;
 import core.objects.SharedFolder;
+import core.objects.SharedFolderImpl;
 
 public class Search {
 	
@@ -51,15 +52,15 @@ public class Search {
 		return directories;
 	}
 	
-	public List<File> getCurrentConversations()
+	public List<SharedFolder> getCurrentConversations()
 	{
 		List<File> allFolders = getAllSubdirectoriesOfRoot();
-		List<File> chatFolders = new ArrayList<File>();
+		List<SharedFolder> chatFolders = new ArrayList<SharedFolder>();
 		for(File file : allFolders)
 		{
 			if(file.getName().equals(".chat"))
 			{
-				chatFolders.add(file.getParentFile());
+				chatFolders.add(new SharedFolderImpl(file.getParentFile()));
 			}
 		}
 		return chatFolders;
@@ -68,11 +69,10 @@ public class Search {
 	public static void main(String[] args) throws IOException
 	{
 		Search sMain = new Search();
-		List<File> subs = sMain.getCurrentConversations();
-		for(File f : subs)
+		List<SharedFolder> subs = sMain.getCurrentConversations();
+		for(SharedFolder f : subs)
 		{
-			System.out.println(f.getAbsolutePath());
-			System.out.println(f.getName());
+			
 		}
 	}
 }
