@@ -21,8 +21,10 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	List<Project> projects;
 	List<String> list;
 	JPanel projectPanel = new JPanel();
+	CreateChat newChat = new CreateChat();
 	
 	public SearchPanel(){
+		setLayout(null);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		//root = getRoot();
 		list = new LinkedList<String>();
@@ -31,17 +33,27 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		JScrollPane scroll = new JScrollPane(projectPanel);
 		scroll.setBounds(5,100,500,50);
 		
-		CreateChat newChat = new CreateChat();
-		add(newChat);
+		newChat.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				//TODO
+			}
+		});
 		
 		if (projects != (null)){
 			for (String string : list){
-				projects.add(new Project(string));
+				Project proj = new Project(string);
+				proj.addActionListener(new ActionListener(){
+					public void actionPerformed(ActionEvent e) {
+						//TODO 
+					}
+				});
+				projects.add(proj);
 			}
 			Collections.sort(projects);
 		}
 		
-		setLayout(null);
+		projectPanel.add(newChat);
+		
 		searchField = new JTextField();
 		searchField.setBounds(5,5,285,50);
 		searchField.getDocument().addDocumentListener(this);
@@ -52,6 +64,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	public void insertUpdate(DocumentEvent arg0) {
 		String desired = searchField.getText();
 		projectPanel.removeAll();
+		projectPanel.add(newChat);
 		if (projects != null){
 			for (Project project : projects){
 				if (project.getProjectName().substring(0,desired.length()).contains(desired)){
