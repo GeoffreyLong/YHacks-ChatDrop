@@ -20,9 +20,16 @@ public class CoreMain {
 		}
 	};
 	
+	public void initialize()
+	{
+		rootDirectory = new File(System.getProperty("user.dir"));
+	}
+	
 	public static CoreMain get()
 	{
-		return core.get();
+		CoreMain main = core.get();
+		main.initialize();
+		return main;
 	}
 	
 	public File getRootDirectory()
