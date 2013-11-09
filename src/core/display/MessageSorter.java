@@ -1,22 +1,28 @@
 package core.display;
 
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-
-import org.joda.time.DateTime;
 
 import core.objects.Message;
-import core.objects.MessageImpl;
+import core.objects.SharedFolder;
+import core.objects.User;
 
 public class MessageSorter {
 	
 	List<List<Message>> allMessages;
+	List<User> users;
 	List<Integer> arrayPos;
 	
 	
-	public MessageSorter(List<List<Message>> messages)
+	public MessageSorter(SharedFolder folder)
+	{
+		folder.instantiate();
+		instantiate(folder.getMessages());
+		folder.getUsers();
+	}
+	
+	public void instantiate(List<List<Message>> messages)
 	{
 		this.allMessages = messages;
 		arrayPos = new ArrayList<Integer>(allMessages.size());

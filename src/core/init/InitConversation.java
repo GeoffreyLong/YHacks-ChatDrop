@@ -3,6 +3,7 @@ package core.init;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
@@ -29,12 +30,12 @@ public class InitConversation implements Serializable
 	 */
 	private static final long serialVersionUID = 6656076942650832481L;
 
-	public InitConversation(SharedFolder folder) throws DbxException
+	public static void create(SharedFolder folder) throws DbxException
 	{
 		File chat;
-		if((chat = folder.getChatFolder()) != null)
-			if(chat.isDirectory())
-				return;
+		//if((chat = folder.getChatFolder()) != null)
+			//if(chat.isDirectory() )
+			//	return;
 		
 		File topLevel = folder.getTopLevel();
 		if(topLevel.exists() && topLevel.isFile())
@@ -45,9 +46,9 @@ public class InitConversation implements Serializable
 		chat = new File(topLevel, ".chat");
 		if(chat.exists() && chat.isFile())
 			throw new NotAFolderException("Chat");
-		else if(!topLevel.exists())
-			topLevel.mkdir();
-		
+		else if(!chat.exists())
+			chat.mkdir();
+		folder.setChatFolder(chat);
 		CoreMain main = CoreMain.get();
 		
 		User owner = main.getOwner();
@@ -56,11 +57,13 @@ public class InitConversation implements Serializable
 		
 		File logFile = new File(chat, id.toString() + ".json");
 		
+		
 		if(logFile.exists())
 			return;
 		else
 		{
 			try {
+				
 				DateTime date = new DateTime();
 				
 				JsonObjectBuilder top = Json.createObjectBuilder();
@@ -68,11 +71,13 @@ public class InitConversation implements Serializable
 				top.add("joinDate", date.toString());
 				JsonArrayBuilder messageArray = Json.createArrayBuilder();
 				top.add("messages", messageArray);
-
 				BufferedWriter write = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(logFile), StandardCharsets.UTF_8));
 				JsonWriter jsonWrite = Json.createWriter(write);
 				
-				jsonWrite.writeObject(top.build());				
+				jsonWrite.writeObject(top.build());	
+				jsonWrite.close();
+				write.close();
+				
 				
 			} catch (IOException e) {
 				
