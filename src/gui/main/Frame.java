@@ -8,7 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 public class Frame {
-	static JFrame frame = new JFrame();
+	public static JFrame frame = new JFrame();
 	public Frame(){
 		frame.setVisible(true);
 		frame.setBounds(25, 25, 1100, 700);
