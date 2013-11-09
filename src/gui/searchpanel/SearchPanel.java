@@ -3,6 +3,7 @@ package gui.searchpanel;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,6 +23,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	JPanel projectPanel = new JPanel();
 	
 	public SearchPanel(){
+		setBorder(BorderFactory.createLineBorder(Color.black));
 		//root = getRoot();
 		list = new LinkedList<String>();
 		//list = root.list();
@@ -29,12 +31,14 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		JScrollPane scroll = new JScrollPane(projectPanel);
 		scroll.setBounds(5,60,500,50);
 		
-		for (String string : list){
-			projects.add(new Project(string));
+		if (projects != (null)){
+			for (String string : list){
+				projects.add(new Project(string));
+			}
+			Collections.sort(projects);
 		}
 		
 		setLayout(null);
-		setBorder(BorderFactory.createLineBorder(Color.black));
 		searchField = new JTextField();
 		searchField.setBounds(5,5,285,50);
 		searchField.getDocument().addDocumentListener(this);
@@ -45,9 +49,11 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	public void insertUpdate(DocumentEvent arg0) {
 		String desired = searchField.getText();
 		projectPanel.removeAll();
-		for (Project project : projects){
-			if (project.getProjectName().substring(0,desired.length()).contains(desired)){
-				projectPanel.add(project);
+		if (projects != null){
+			for (Project project : projects){
+				if (project.getProjectName().substring(0,desired.length()).contains(desired)){
+					projectPanel.add(project);
+				}
 			}
 		}
 		repaint();
