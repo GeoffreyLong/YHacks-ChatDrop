@@ -28,6 +28,7 @@ public class Frame {
 	public static JFrame frame = new JFrame();
 	static gui.chatpanel.EmptyChat empty;
 	public static String name;
+	private static gui.chatpanel.EntryPanel entryPanel;
 	
 	public Frame(){
 		frame.setVisible(true);
@@ -59,7 +60,7 @@ public class Frame {
         };
         frame.addWindowListener(exitListener);
 	}
-	public void initSearch(List<SharedFolder> list){
+	public static void initSearch(List<SharedFolder> list){
 		gui.searchpanel.SearchPanel searchPanel = new gui.searchpanel.SearchPanel(list);
 		searchPanel.setBounds(5,5,300,660);
 		frame.add(searchPanel);
@@ -75,24 +76,29 @@ public class Frame {
 		frame.repaint();
 	}
 	public static void chatQuickUpdate(SharedFolder sharedFolder){
-		MessageSorter messages = new MessageSorter(sharedFolder);
-		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(messages);
-		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel(sharedFolder, messages);
-		chatPanel.setBounds(310,65,780,430);
-		entryPanel.setBounds(310,500,780,165);
-		updateChat(chatPanel, entryPanel);
+		entryPanel.updateMessages(sharedFolder);
+		updateChat(sharedFolder);
 	}
 	public static void initChat(MessageSorter messages, SharedFolder sharedFolder){
 		welcomePanel();
 		empty.setVisible(false);
+		entryPanel = new gui.chatpanel.EntryPanel(sharedFolder, messages);
+		entryPanel.setBounds(310,500,780,165);
 		chatQuickUpdate(sharedFolder);
 		Timer timer = new Timer(5000, new gui.chatpanel.Chat(sharedFolder));
 		timer.start();
 	}
-	public static void updateChat(ChatPanel chatPanel, EntryPanel entryPanel){
+	public static void updateChat(SharedFolder sharedFolder){
+		frame.getContentPane().removeAll();
+		core.search.Search obj = new core.search.Search();
+		initSearch(obj.getCurrentConversations());
 		welcomePanel();
-		frame.add(chatPanel);
+		entryPanel.updateMessages(sharedFolder);
+		MessageSorter messages = new MessageSorter(sharedFolder);
+		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(messages);
+		chatPanel.setBounds(310,65,780,430);
 		frame.add(entryPanel);
+		frame.add(chatPanel);
 		frame.validate();
 		frame.repaint();
 	}

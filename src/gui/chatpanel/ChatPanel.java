@@ -33,18 +33,24 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 	private MessageSorter messageSorter;
 	
 	public ChatPanel(MessageSorter messageSorter){
+		innerPanel.removeAll();
 		setLayout(null);
 		this.messageSorter = messageSorter;
-		ArrayList<Message> messages = messageSorter.getMessages(15);
+		List<Message> messages = messageSorter.getMessages(500);
 		
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 		JScrollPane scroll = new JScrollPane(innerPanel);
+		scroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
+		public void adjustmentValueChanged(AdjustmentEvent e) {  
+		        e.getAdjustable().setValue(e.getAdjustable().getMaximum());  
+		    }
+		});
 		scroll.setBounds(5,5,765,390);
 		add(scroll);
 		
 		setBorder(BorderFactory.createLineBorder(Color.black));
-		for (int i=messages.size()-1; i>=0; i--){
-			MessagePanel messagePanel = new MessagePanel(messages.get(i));
+		for (Message message : messages){
+			MessagePanel messagePanel = new MessagePanel(message);
 			int ySize = messagePanel.getYSize();
 			messagePanel.setPreferredSize(new Dimension(570,ySize));
 			messagePanel.setMaximumSize(new Dimension(570,ySize));
@@ -58,13 +64,8 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 			label.setBounds(100,300,100,20);
 			innerPanel.add(label);
 		}
-		
-		/*
-		vertical = scroll.getVerticalScrollBar();
-		vertical.setValue( vertical.getMaximum() );
-		
-		vertical.addAdjustmentListener(this);
-		*/
+
+
 	}
 	public void adjustmentValueChanged(AdjustmentEvent arg0) {
 		if (vertical.getValue() == vertical.getMinimum()){

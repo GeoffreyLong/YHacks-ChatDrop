@@ -76,7 +76,6 @@ public class EntryPanel extends JPanel implements ActionListener{
 	
 	public void pipeData(){
 		DateTime date = new DateTime();
-    	
     	core.objects.Message mess = new core.objects.MessageImpl(gui.main.Frame.name, entryArea.getText(), date);
     	try {
 			new core.io.ChatWriter(sharedFolder, mess);
@@ -90,7 +89,12 @@ public class EntryPanel extends JPanel implements ActionListener{
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-    	gui.main.Frame.chatQuickUpdate(sharedFolder);
+    	
     	entryArea.setText("");
+    	gui.main.Frame.chatQuickUpdate(sharedFolder);
+	}
+
+	public void updateMessages(SharedFolder messages2) {
+		this.sharedFolder = messages2;
 	}
 }

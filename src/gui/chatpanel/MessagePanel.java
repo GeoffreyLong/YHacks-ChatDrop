@@ -11,6 +11,7 @@ public class MessagePanel extends JPanel{
 		JLabel userName = new JLabel(message.getUserName());
 		JLabel date = new JLabel(message.getDate().toString("MMMM dd',' yyyy H':'m':'s"));
 		String string = message.getMessageText();
+		
 		String fullString = "<html>";
 		if (string.length()>80){
 			String[] str = string.split(" ");

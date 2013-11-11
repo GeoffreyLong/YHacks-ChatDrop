@@ -12,12 +12,7 @@ public class Chat implements ActionListener{
 		this.sharedFolder = sharedFolder;
 	}
 	public void actionPerformed(ActionEvent arg0) {
-		MessageSorter messages = new MessageSorter(sharedFolder);
-		gui.chatpanel.ChatPanel chatPanel = new gui.chatpanel.ChatPanel(messages);
-		gui.chatpanel.EntryPanel entryPanel = new gui.chatpanel.EntryPanel(sharedFolder, messages);
-		chatPanel.setBounds(310,65,780,430);
-		entryPanel.setBounds(310,500,780,165);
-		gui.main.Frame.updateChat(chatPanel, entryPanel);
+		gui.main.Frame.updateChat(sharedFolder);
 	}
 	
 }

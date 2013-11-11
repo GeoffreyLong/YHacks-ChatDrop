@@ -1,8 +1,13 @@
 package core.display;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeComparator;
+import org.joda.time.LocalDate;
 
 import core.objects.Message;
 import core.objects.SharedFolder;
@@ -10,65 +15,45 @@ import core.objects.User;
 
 public class MessageSorter {
 	
-	List<List<Message>> allMessages;
+	List<Message> allMessages;
 	List<User> users;
-	List<Integer> arrayPos;
 	
 	
 	public MessageSorter(SharedFolder folder)
 	{
 		folder.instantiate();
 		instantiate(folder.getMessages());
-		folder.getUsers();
+		users = folder.getUsers();
+	}
+	
+
+	private class MessageComparitor implements Comparator<Message>
+	{
+		public int compare(Message o1, Message o2) {
+			
+			LocalDate date1 = new LocalDate(o1.getDate());
+			LocalDate date2 = new LocalDate(o2.getDate());
+			return date1.compareTo(date2);
+		}
+
+		
 	}
 	
 	public void instantiate(List<List<Message>> messages)
 	{
-		this.allMessages = messages;
-		arrayPos = new ArrayList<Integer>(allMessages.size());
-		for(int i = 0; i < allMessages.size(); i++)
-			arrayPos.add(i, allMessages.get(i).size()-1);
+		List<Message> allMessagesSorted = new ArrayList<Message>();
+		for(List<Message> list : messages)
+		{
+			allMessagesSorted.addAll(list);
+		}
+		Collections.sort(allMessagesSorted, new MessageComparitor());
+		allMessages = allMessagesSorted;
 	}
 	
-	public ArrayList<Message> getMessages(int amount)
+	public List<Message> getMessages(int amount)
 	{
-		ArrayList<Message> messagesToReturn = new ArrayList<Message>(amount);
-		int users = allMessages.size();
-		
-		for(int i = 0; i < amount ; i++)
-		{
-			int mostRecent = -1;
-			Message toReturn = null;
-			for(int j = 0; j < users; j++)
-			{
-				if(arrayPos.get(j) != -1)
-				{
-					if(mostRecent == -1)
-					{
-						mostRecent = j;
-						toReturn = allMessages.get(j).get(arrayPos.get(j));
-					}
-					else
-					{
-						Message toTest = allMessages.get(j).get(arrayPos.get(j));
-						if(toReturn.getDate().isAfter(toTest.getDate()))
-						{
-							toReturn = toTest;
-							mostRecent = j;
-						}
-					}
-				}
-			}
-			if(mostRecent == -1) 
-				return messagesToReturn;
-			else
-			{
-				messagesToReturn.add(toReturn);
-				arrayPos.set(mostRecent, arrayPos.get(mostRecent) - 1);
-			}
-		}
-		
-		return messagesToReturn;
+		return allMessages.subList(0, amount > allMessages.size()? allMessages.size() : amount );
+
 		
 	}
 	

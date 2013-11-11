@@ -6,8 +6,8 @@ public class Start {
 		try{
 			frame = new Frame();
 			core.search.Search obj = new core.search.Search();
-			frame.initSearch(obj.getCurrentConversations());
 			frame.initEmptyChat();
+			frame.initSearch(obj.getCurrentConversations());
 		}catch(Exception e){
 			e.printStackTrace();
 			System.out.println("GUI could not instantiate");
