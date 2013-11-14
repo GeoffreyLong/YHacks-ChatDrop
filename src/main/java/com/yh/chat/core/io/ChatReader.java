@@ -38,7 +38,7 @@ public class ChatReader {
 		return users;
 	}
 	
-	public List<List<Message>> compileMessages() throws FileNotFoundException, IOException {
+	public List<Message> compileMessages() throws FileNotFoundException, IOException {
 		
 		File workingDir=projectName.getChatFolder();
 		ArrayList<File> files = new ArrayList<File>();
@@ -49,7 +49,8 @@ public class ChatReader {
 			}
 		}
 		users = new ArrayList<User>(files.size());
-		List<List<Message>> compiled= new ArrayList<List<Message>>();
+		List<Message> simpleMessageList = new ArrayList<Message>();
+		
 		for(File f : files){
 			BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream (f),StandardCharsets.UTF_8));
 			JsonReader jr =  Json.createReader(read);
@@ -59,17 +60,17 @@ public class ChatReader {
 			users.add(new UserImpl(Long.parseLong(f.getName().replace(".json", "")),name));
 			
 			JsonArray ja = (JsonArray)jObj.get("messages");
-			ArrayList<Message> messages = new ArrayList<Message>();
+			
 			for(int i=0;i<ja.size();i++){
 				JsonObject singleMessage = ja.getJsonObject(i);
 				
 				String s = singleMessage.getString("date");
-				Message m = new MessageImpl(name,singleMessage.getString("message"),new DateTime(s));
-				 messages.add(m);
+				String mString = singleMessage.getString("message");
+				Message m = new MessageImpl(name,mString,new DateTime(s));
+				simpleMessageList.add(m);
 			}
-			compiled.add(messages);
 			read.close();
 		}
-		return compiled;
+		return simpleMessageList;
 	}
 }

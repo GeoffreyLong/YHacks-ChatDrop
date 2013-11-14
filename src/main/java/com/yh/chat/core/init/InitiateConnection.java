@@ -32,7 +32,7 @@ public class InitiateConnection {
 	        	String authorizeUrl = webAuth.start();
 	        	//Make GUI for authorization
 	        	
-	        	Frame frame = new Frame();
+	        	Frame frame = new Frame(Frame.FrameOpts.Empty);
 	        	String code = frame.newUser(authorizeUrl);
 	        	
 	        	DbxAuthFinish authFinish = webAuth.finish(code);

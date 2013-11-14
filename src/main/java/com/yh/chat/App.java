@@ -12,7 +12,7 @@ public class App
 	public static void main(String[] args){
 		Frame frame;
 		try{
-			frame = new Frame();
+			frame = new Frame(Frame.FrameOpts.Init);
 			Search obj = new Search();
 			Frame.initEmptyChat();
 			Frame.initSearch(obj.getCurrentConversations());

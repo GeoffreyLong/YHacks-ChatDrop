@@ -34,25 +34,41 @@ public class Frame {
 	public static String name;
 	private static EntryPanel entryPanel;
 	
-	public Frame(){
+	public enum FrameOpts
+	{
+		Empty,
+		Init;
+	}
+	
+	public Frame(FrameOpts opt){
 		frame.setVisible(true);
 		frame.setBounds(25, 25, 1100, 700);
 		frame.getContentPane().setBackground(new Color(0x123456));
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setLayout(null);
-		
-    	name = "";
-		try {
-			name = CoreMain.get().getOwner().getUserDisplayName();
-		} catch (DbxException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		switch(opt)
+		{
+			case Init:
+		    	name = "";
+				try {
+					CoreMain main = CoreMain.get();
+					main.initialize();
+					name = main.getOwner().getUserDisplayName();
+				} catch (DbxException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				break;
+			case Empty:
+			default:
+				break;
 		}
 		
 		WindowListener exitListener = new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                int confirm = JOptionPane.showOptionDialog(null, "Are You Sure to Close Application?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+                int confirm = JOptionPane.showOptionDialog(null, "Are You You Want to Close Application?", "Exit Confirmation", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
                 if (confirm == 0) {
                 	//Main.closeConnection();
                 	System.exit(0);
@@ -63,7 +79,9 @@ public class Frame {
             }
         };
         frame.addWindowListener(exitListener);
+		
 	}
+	
 	public static void initSearch(List<SharedFolder> list){
 		SearchPanel searchPanel = new SearchPanel(list);
 		searchPanel.setBounds(5,5,300,660);
@@ -112,7 +130,7 @@ public class Frame {
 		frame.add(newUser);
 		frame.validate();
 		frame.repaint();
-		
+		String a = newUser.getURL();
 		/*
 		 * Although a blocking while statement like this 
 		 * is usually frowned upon, here I think it may be acceptable
@@ -124,9 +142,9 @@ public class Frame {
 		frame.validate();
 		frame.repaint();
 		
-		Search obj = new Search();
-		initSearch(obj.getCurrentConversations());
-		initEmptyChat();
+		//Search obj = new Search();
+		//initSearch(obj.getCurrentConversations());
+		//initEmptyChat();
 		
 		return newUser.getURL();
 	}

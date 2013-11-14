@@ -12,6 +12,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.yh.chat.gui.values.WindowSizes;
+
 public class NewUserPanel extends JPanel implements ActionListener{
 	private final JTextField url;
 	private boolean readyBoolean = false;
@@ -19,7 +21,7 @@ public class NewUserPanel extends JPanel implements ActionListener{
 	public NewUserPanel(String authorizeUrl){
 		setLayout(null);
 		setVisible(true);
-		setBounds(0,0,900,600);
+		setBounds(0,0,WindowSizes.getX(),WindowSizes.getY());
 		String urlHalf = authorizeUrl.substring(0,authorizeUrl.length()/2);
 		String urlSecond = authorizeUrl.substring(authorizeUrl.length()/2+1, authorizeUrl.length());
 		
@@ -93,7 +95,7 @@ public class NewUserPanel extends JPanel implements ActionListener{
 		add(url);
 	}
 	public Dimension getPreferredSize() {
-        return new Dimension(900,700);
+        return new Dimension(WindowSizes.getX(),WindowSizes.getY());
 	}
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Submit")){

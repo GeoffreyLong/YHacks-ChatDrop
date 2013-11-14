@@ -6,7 +6,7 @@ public class Start {
 	public static void main(String[] args){
 		Frame frame;
 		try{
-			frame = new Frame();
+			frame = new Frame(Frame.FrameOpts.Init);
 			Search obj = new Search();
 			frame.initEmptyChat();
 			frame.initSearch(obj.getCurrentConversations());
