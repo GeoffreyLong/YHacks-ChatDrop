@@ -4,6 +4,9 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -12,49 +15,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.yh.chat.core.display.OpenResource;
 import com.yh.chat.gui.values.WindowSizes;
 
 public class NewUserPanel extends JPanel implements ActionListener{
 	private final JTextField url;
 	private boolean readyBoolean = false;
 	
+	private class MouseAdapterOpenUrl
+	{
+		
+	}
+	
 	public NewUserPanel(String authorizeUrl){
 		setLayout(null);
 		setVisible(true);
 		setBounds(0,0,WindowSizes.getX(),WindowSizes.getY());
-		String urlHalf = authorizeUrl.substring(0,authorizeUrl.length()/2);
-		String urlSecond = authorizeUrl.substring(authorizeUrl.length()/2+1, authorizeUrl.length());
-		
-		//Possible hyperlink implementation
-		/*
-		final URI uri;
-		try {
-			uri = new URI(authorizeUrl);
-			JButton button = new JButton();
-	        button.setText("www.roseindia.net");
-	        button.setBorderPainted(false);
-	        button.setOpaque(false);
-	        button.addActionListener(new ActionListener() {
-	                public void actionPerformed(ActionEvent e) {
-	                        if (Desktop.isDesktopSupported()) {
-	                                Desktop desktop = Desktop.getDesktop();
-	                                try {
-	                                        desktop.browse(uri);
-	                                } catch (Exception ex) {
-	                                }
-	                        } else {
-	                        }
-	                }
-	        });
-	        add(button);
-		} catch (URISyntaxException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        */
 		
 		JLabel welcomeLabel = new JLabel("<html>"
-				+ "Welcome to ChatterBox"
+				+ "<big>Welcome to ChatterBox!</big><br>"
 				//logo here
 				+ "<p>This application allows you to easily converse across all your "
 				+ "shared folders. <br> Use this application to easily perform the following actions: "
@@ -68,18 +47,30 @@ public class NewUserPanel extends JPanel implements ActionListener{
 				+ "If you would like to initialize this service follow these instructions:"
 				+ "</p>"
 				+ "<ul>"
-				+ "<li> Copy and Paste the link below into a browser <br></li>"
-				+ "<li> Go to the link <br></li>"
-				+ "<li> Click Allow (you might have to log in first) </li>"
+				+ "<li> Click the link below.<br></li>"
+				+ "<li> Click Allow (you might have to log in first). </li>"
 				+ "<li> Copy the authorization code. </li>"
-				+ "<li> Paste it to the text area and submit </li>"
+				+ "<li> Paste it to the text area and submit. </li>"
 				+ "</ul>"
 				+ "</html>");
 		welcomeLabel.setBounds(100,100,800,300);
 		
-		JTextField urlField = new JTextField(authorizeUrl);
+		JButton urlField = new JButton(authorizeUrl);
 		urlField.setBounds(50,450,800,20);
-		urlField.setEditable(false);
+		urlField.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				super.mouseClicked(e);
+				try {
+					OpenResource.open(new URI(((JButton) e.getSource()).getText()));
+				} catch (URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+		
 		add(urlField);
 		
 		url = new JTextField();

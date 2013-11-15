@@ -26,7 +26,7 @@ public class InitiateConnection {
 	        DbxClient client;
 	        DbxAppInfo appInfo = new DbxAppInfo(APP_KEY, APP_SECRET);
 	        DbxRequestConfig config = new DbxRequestConfig("YHacksChatDrop/1.0", Locale.getDefault().toString());
-	        if(!(new File("authCode")).exists()){
+	        if(!(new File(".chatSettings/authCode.txt")).exists()){
 	        
 	        	DbxWebAuthNoRedirect webAuth = new DbxWebAuthNoRedirect(config, appInfo);
 	        	String authorizeUrl = webAuth.start();
@@ -36,9 +36,9 @@ public class InitiateConnection {
 	        	String code = frame.newUser(authorizeUrl);
 	        	
 	        	DbxAuthFinish authFinish = webAuth.finish(code);
-	        	File authCodeFolder= new File("authCode");
+	        	File authCodeFolder= new File(".chatSettings");
 	        	boolean worked = authCodeFolder.mkdir();
-	        	File authCode = new File("authCode/authCode.txt");
+	        	File authCode = new File(authCodeFolder, "authCode.txt");
 	        	BufferedWriter bw = new BufferedWriter(new FileWriter(authCode));
 	        	bw.write(authFinish.accessToken);
 	        	bw.close();
@@ -46,10 +46,9 @@ public class InitiateConnection {
 	        }
 	        else {
 	        	System.out.println("Already authenticated");
-	        	BufferedReader br = new BufferedReader(new FileReader(new File("authCode/authCode.txt")));
+	        	BufferedReader br = new BufferedReader(new FileReader(new File(".chatSettings/authCode.txt")));
 	        	String s = br.readLine();
 	        	client = new DbxClient(config, s);
-	        	client.createFolder("/publicTest");
 	        	br.close();
 	        
 	        }

@@ -12,8 +12,8 @@ public interface SharedFolder extends Serializable {
 	public void setTopLevel(File topLevel);
 	public List<User> getUsers();
 	public void setUsers(List<User> users);
-	public List<Message> getMessages();
-	public void setMessages(List<Message> messages);
+	public List<SortableByDate> getMessages();
+	public void setMessages(List<SortableByDate> messages);
 	public File getChatFolder();
 	public void setChatFolder(File chat);
 	public void instantiate();

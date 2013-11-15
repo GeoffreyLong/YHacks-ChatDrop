@@ -6,7 +6,9 @@ import com.yh.chat.gui.searchpanel.Project;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.EventQueue;
 import java.awt.Frame;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.AdjustmentEvent;
@@ -17,6 +19,7 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollBar;
@@ -26,52 +29,137 @@ import javax.swing.JTextField;
 import com.yh.chat.core.display.MessageSorter;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.SharedFolder;
+import com.yh.chat.core.objects.SortableByDate;
 
 public class ChatPanel extends JPanel implements AdjustmentListener{
 	JScrollBar vertical;
 	JPanel innerPanel = new JPanel();
 	private MessageSorter messageSorter;
+	private int messageAmount = 10;
+	private static boolean allowScrollUp = true;
 	
-	public ChatPanel(MessageSorter messageSorter){
+	public void update()
+	{
+		if(vertical != null && vertical.getValue() + vertical.getHeight() == vertical.getMaximum())
+			scrollToBottom();
 		innerPanel.removeAll();
-		setLayout(null);
-		this.messageSorter = messageSorter;
-		List<Message> messages = messageSorter.getMessages(500);
-		
-		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
-		JScrollPane scroll = new JScrollPane(innerPanel);
-		scroll.getVerticalScrollBar().addAdjustmentListener(new AdjustmentListener() {  
-		public void adjustmentValueChanged(AdjustmentEvent e) {  
-		        e.getAdjustable().setValue(e.getAdjustable().getValue());  
-		    }
-		});
-		scroll.setBounds(5,5,765,390);
-		add(scroll);
-		
-		setBorder(BorderFactory.createLineBorder(Color.black));
-		for (Message message : messages){
-			MessagePanel messagePanel = new MessagePanel(message);
-			int ySize = messagePanel.getYSize();
-			messagePanel.setPreferredSize(new Dimension(570,ySize));
-			messagePanel.setMaximumSize(new Dimension(570,ySize));
-			messagePanel.setMinimumSize(new Dimension(570,ySize));
-			messagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
-			innerPanel.add(messagePanel);
-		}
+		List<SortableByDate> messages = messageSorter.getMessages(messageAmount);
 		
 		if (messages.size()<=0){
 			JLabel label = new JLabel("no data");
 			label.setBounds(100,300,100,20);
 			innerPanel.add(label);
 		}
-
-
+		else
+		{
+			for (SortableByDate message : messages){
+				MessagePanel messagePanel = new MessagePanel(message);
+				int ySize = messagePanel.getYSize();
+				Dimension dim = new Dimension(740, ySize);
+				messagePanel.setPreferredSize(dim);
+				messagePanel.setMaximumSize(dim);
+				messagePanel.setMinimumSize(dim);
+				messagePanel.setAlignmentX(Component.CENTER_ALIGNMENT);
+				innerPanel.add(messagePanel);
+			}
+		}
+		
+		validate();
 	}
-	public void adjustmentValueChanged(AdjustmentEvent arg0) {
-		if (vertical.getValue() == vertical.getMinimum()){
-			//TODO
+	
+	public void update(MessageSorter messageSorter)
+	{
+		this.messageSorter = messageSorter;
+		update();
+	}
+	
+	public class RunOuter implements Runnable
+	{
+		int val;
+		public RunOuter(int val)
+		{
+			this.val = val;
+		}
+		
+		public void run()
+		{
+			EventQueue.invokeLater(new RunLater(val));
 		}
 	}
+	
+	public class RunLater implements Runnable
+	{
+		int val;
+		public RunLater(int val)
+		{
+			this.val = val;
+		}
+		public void run() {
+           	vertical.setValue(vertical.getMaximum() - val);
+           	allowScrollUp = true;
+        }
+
+	}
+	
+	public class AdjListener implements AdjustmentListener
+	{
+		public void adjustmentValueChanged(AdjustmentEvent e) 
+		{
+	    	if(e.getValue() == 0 && allowScrollUp)
+	    	{
+	    		allowScrollUp = false;
+	    		int max = vertical.getMaximum();
+	    		messageAmount +=10;
+	    		scrollToVal(max);
+	    		update();
+	    	}
+		}
+		
+	}
+	
+	public ChatPanel(MessageSorter messageSorter){
+		innerPanel.removeAll();
+		setLayout(null);
+		
+		update(messageSorter);
+		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
+		JScrollPane scroll = new JScrollPane(innerPanel);
+		scroll.setBounds(5,5,765,390);
+		add(scroll);
+		vertical = scroll.getVerticalScrollBar();
+		vertical.setValue(1);
+		vertical.addAdjustmentListener(new AdjListener());
+		vertical.setUnitIncrement(16);
+		
+		setBorder(BorderFactory.createLineBorder(Color.black));
+		scrollToBottom();
+		validate();
+	}
+	public void scrollToVal(int val)
+	{
+        EventQueue.invokeLater(new RunOuter(val));
+	}
+	
+	public void scrollToBottom()
+	{
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                EventQueue.invokeLater(new Runnable() {
+                    public void run() {
+                    	vertical.setValue(vertical.getMaximum());
+                    }
+                });
+            }
+        });
+		
+	}
+
+	public void adjustmentValueChanged(AdjustmentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 	/*
 	public static void addMessage(Message message){
 		MessagePanel messagePanel = new MessagePanel(message);

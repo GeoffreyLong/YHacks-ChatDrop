@@ -13,11 +13,12 @@ import org.joda.time.LocalDateTime;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.MessageImpl;
 import com.yh.chat.core.objects.SharedFolder;
+import com.yh.chat.core.objects.SortableByDate;
 import com.yh.chat.core.objects.User;
 
 public class MessageSorter {
 	
-	List<Message> allMessages;
+	List<SortableByDate> allMessages;
 	List<User> users;
 	
 	
@@ -34,9 +35,9 @@ public class MessageSorter {
 	}
 	
 
-	private class MessageComparitor implements Comparator<Message>
+	private class DateComparitor implements Comparator<SortableByDate>
 	{
-		public int compare(Message o1, Message o2) 
+		public int compare(SortableByDate o1, SortableByDate o2) 
 		{
 			LocalDateTime date1 = new LocalDateTime(o1.getDate());
 			LocalDateTime date2 = new LocalDateTime(o2.getDate());
@@ -46,16 +47,20 @@ public class MessageSorter {
 	
 	
 	
-	public void instantiate(List<Message> messages)
+	public void instantiate(List<SortableByDate> messages)
 	{
-		List<Message> mes = new ArrayList<Message>(messages);
-		Collections.sort(mes, new MessageComparitor());
+		List<SortableByDate> mes = new ArrayList<SortableByDate>(messages);
+		Collections.sort(mes, new DateComparitor());
 		allMessages = mes;
 	}
 	
-	public List<Message> getMessages(int amount)
+	public List<SortableByDate> getMessages(int amount)
 	{
-		return allMessages.subList(0, amount > allMessages.size()? allMessages.size() : amount );
+		if(amount > allMessages.size()) return allMessages;
+		else
+		{
+			return allMessages.subList(allMessages.size() - amount,allMessages.size());
+		}
 	}
 	
 	
@@ -69,7 +74,7 @@ public class MessageSorter {
 		Message bM = new MessageImpl("notJoel", "Should be first.", b);
 		Message cM = new MessageImpl("bob", "Should be last", c);
 		
-		ArrayList<Message> mes = new ArrayList<Message>();
+		List<SortableByDate> mes = new ArrayList<SortableByDate>();
 		
 		mes.add(aM);
 		mes.add(bM);
@@ -78,9 +83,12 @@ public class MessageSorter {
 		MessageSorter ms = new MessageSorter();
 		
 		ms.instantiate(mes);
-		for(Message sort : ms.getMessages(20))
+		for(SortableByDate sort : ms.getMessages(20))
 		{
-			System.out.println(sort.getMessageText());
+			if(sort instanceof Message)
+			{
+				System.out.println(((Message) sort).getMessageText());
+			}
 		}
 	}
 	

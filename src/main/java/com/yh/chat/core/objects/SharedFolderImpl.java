@@ -13,7 +13,7 @@ public class SharedFolderImpl implements SharedFolder{
 	private String projectName;
 	private File chatDirectory;
 	private File topLevel;
-	private List<Message> messages;
+	private List<SortableByDate> messages;
 	private List<User> users;
 	
 	public SharedFolderImpl(File path){
@@ -59,10 +59,10 @@ public class SharedFolderImpl implements SharedFolder{
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	public List<Message> getMessages() {
+	public List<SortableByDate> getMessages() {
 		return this.messages;
 	}
-	public void setMessages(List<Message> messages) {
+	public void setMessages(List<SortableByDate> messages) {
 		this.messages = messages;
 		
 	}

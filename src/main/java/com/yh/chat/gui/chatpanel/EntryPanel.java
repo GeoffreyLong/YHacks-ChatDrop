@@ -35,7 +35,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 	private SharedFolder sharedFolder;
 	private MessageSorter messages;
 	
-	public EntryPanel(final SharedFolder sharedFolder, final MessageSorter messages){
+	public EntryPanel(SharedFolder sharedFolder, MessageSorter messages){
 		this.sharedFolder = sharedFolder;
 		this.messages = messages;
 		setBorder(BorderFactory.createLineBorder(Color.black));
@@ -66,7 +66,7 @@ public class EntryPanel extends JPanel implements ActionListener{
         entryArea.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, KeyEvent.SHIFT_DOWN_MASK, true), "Shenter");
         entryArea.getActionMap().put("Shenter", new AbstractAction() {
             public void actionPerformed(ActionEvent e) {
-               // entryArea.append(text+"\n");
+                entryArea.append("\n");
             }
         });
 	}
@@ -94,7 +94,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 		}
     	
     	entryArea.setText("");
-    	Frame.chatQuickUpdate(sharedFolder);
+    	Frame.updateChat(sharedFolder);
 	}
 
 	public void updateMessages(SharedFolder messages2) {

@@ -33,6 +33,7 @@ public class Frame {
 	static EmptyChat empty;
 	public static String name;
 	private static EntryPanel entryPanel;
+	private static ChatPanel chatPanel;
 	
 	public enum FrameOpts
 	{
@@ -97,33 +98,41 @@ public class Frame {
 		frame.validate();
 		frame.repaint();
 	}
-	public static void chatQuickUpdate(SharedFolder sharedFolder){
-		entryPanel.updateMessages(sharedFolder);
-		updateChat(sharedFolder);
-	}
+	
 	public static void initChat(MessageSorter messages, SharedFolder sharedFolder){
 		welcomePanel();
 		empty.setVisible(false);
 		entryPanel = new EntryPanel(sharedFolder, messages);
 		entryPanel.setBounds(310,500,780,165);
-		chatQuickUpdate(sharedFolder);
+		createChat(sharedFolder);
 		Timer timer = new Timer(5000, new Chat(sharedFolder));
 		timer.start();
 	}
-	public static void updateChat(SharedFolder sharedFolder){
+	public static void updateChat(SharedFolder sharedFolder)
+	{
+		entryPanel.updateMessages(sharedFolder);
+		MessageSorter mSort = new MessageSorter(sharedFolder);
+		chatPanel.update(mSort);
+		
+	}
+	
+	private static void createChat(SharedFolder sharedFolder)
+	{
 		frame.getContentPane().removeAll();
 		Search obj = new Search();
 		initSearch(obj.getCurrentConversations());
 		welcomePanel();
 		entryPanel.updateMessages(sharedFolder);
 		MessageSorter messages = new MessageSorter(sharedFolder);
-		ChatPanel chatPanel = new ChatPanel(messages);
+		chatPanel = new ChatPanel(messages);
 		chatPanel.setBounds(310,65,780,430);
 		frame.add(entryPanel);
 		frame.add(chatPanel);
 		frame.validate();
 		frame.repaint();
 	}
+	
+	
 	public String newUser(String authorizeUrl){
 		NewUserPanel newUser = new NewUserPanel(authorizeUrl);
 		frame.setLayout(null);

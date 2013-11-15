@@ -21,6 +21,7 @@ import org.joda.time.format.DateTimeFormatter;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.MessageImpl;
 import com.yh.chat.core.objects.SharedFolder;
+import com.yh.chat.core.objects.SortableByDate;
 import com.yh.chat.core.objects.User;
 import com.yh.chat.core.objects.UserImpl;
 
@@ -38,7 +39,7 @@ public class ChatReader {
 		return users;
 	}
 	
-	public List<Message> compileMessages() throws FileNotFoundException, IOException {
+	public List<SortableByDate> compileMessages() throws FileNotFoundException, IOException {
 		
 		File workingDir=projectName.getChatFolder();
 		ArrayList<File> files = new ArrayList<File>();
@@ -49,13 +50,13 @@ public class ChatReader {
 			}
 		}
 		users = new ArrayList<User>(files.size());
-		List<Message> simpleMessageList = new ArrayList<Message>();
+		List<SortableByDate> simpleMessageList = new ArrayList<SortableByDate>();
 		
 		for(File f : files){
 			BufferedReader read = new BufferedReader(new InputStreamReader(new FileInputStream (f),StandardCharsets.UTF_8));
 			JsonReader jr =  Json.createReader(read);
 			JsonObject jObj = jr.readObject();
-			String name = jObj.get("displayName").toString();
+			String name = jObj.getString("displayName");
 			
 			users.add(new UserImpl(Long.parseLong(f.getName().replace(".json", "")),name));
 			
@@ -66,7 +67,7 @@ public class ChatReader {
 				
 				String s = singleMessage.getString("date");
 				String mString = singleMessage.getString("message");
-				Message m = new MessageImpl(name,mString,new DateTime(s));
+				Message m = new MessageImpl(name, mString, new DateTime(s));
 				simpleMessageList.add(m);
 			}
 			read.close();

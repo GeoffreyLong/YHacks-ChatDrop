@@ -2,6 +2,8 @@ package com.yh.chat.core.objects;
 
 import org.joda.time.DateTime;
 
+import com.yh.chat.core.display.DateFormat;
+
 public class MessageImpl implements Message{
 	private String message;
 	private DateTime date;
@@ -11,7 +13,11 @@ public class MessageImpl implements Message{
 		date = c;
 		message=s;
 	}
-	//Fix these
+	public String getDateDisplay()
+	{
+		return DateFormat.pretty(date);
+	}
+	//TODO: Fix these
 	public String getMessageText(){ return message;}
 	public String getUserName(){return name;}
 	public DateTime getDate(){return date;}
