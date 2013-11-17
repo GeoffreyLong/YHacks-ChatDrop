@@ -34,6 +34,7 @@ public class Frame {
 	public static String name;
 	private static EntryPanel entryPanel;
 	private static ChatPanel chatPanel;
+	private static Chat chat;
 	
 	public enum FrameOpts
 	{
@@ -100,20 +101,22 @@ public class Frame {
 	}
 	
 	public static void initChat(MessageSorter messages, SharedFolder sharedFolder){
+		frame.getContentPane().removeAll();
+		chatPanel.removeAll();
 		welcomePanel();
 		empty.setVisible(false);
 		entryPanel = new EntryPanel(sharedFolder, messages);
 		entryPanel.setBounds(310,500,780,165);
 		createChat(sharedFolder);
-		Timer timer = new Timer(5000, new Chat(sharedFolder));
+		Timer timer = new Timer(5000, chat = new Chat(sharedFolder));
 		timer.start();
 	}
 	public static void updateChat(SharedFolder sharedFolder)
 	{
+
 		entryPanel.updateMessages(sharedFolder);
 		MessageSorter mSort = new MessageSorter(sharedFolder);
-		chatPanel.update(mSort);
-		
+		chatPanel.update(mSort);		
 	}
 	
 	private static void createChat(SharedFolder sharedFolder)

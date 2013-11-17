@@ -58,6 +58,7 @@ public class CreateChat extends JButton{
 		    file = new java.io.File(currentPath);
         }
         
+        if(!file.exists()) file.mkdirs();
 	    return file;
 	}
 }
