@@ -25,6 +25,8 @@ public class NewUserPanel extends JPanel implements ActionListener{
 	private final JTextField url;
 	private boolean readyBoolean = false;
 	private final String urlName;
+	private JTextField text;
+	private JLabel errorLabel;
 	
 	private class MouseAdapterOpenUrl
 	{
@@ -33,7 +35,7 @@ public class NewUserPanel extends JPanel implements ActionListener{
 	
 	public NewUserPanel(String authorizeUrl){
 		setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();;
+		final GridBagConstraints c = new GridBagConstraints();;
 		setVisible(true);
 		setBounds(0,0,WindowSizes.getX(),WindowSizes.getY());
 		
@@ -78,6 +80,10 @@ public class NewUserPanel extends JPanel implements ActionListener{
 					OpenResource.open(new URI(urlName));
 				} catch (URISyntaxException e1) {
 					e1.printStackTrace();
+				}finally{
+					//TODO fix shift when this runs
+					errorLabel.setVisible(true);
+					text.setVisible(true);
 				}
 			}
 			
@@ -110,6 +116,24 @@ public class NewUserPanel extends JPanel implements ActionListener{
 		c.ipadx = 40;
 		c.anchor = GridBagConstraints.EAST;
 		add(online, c);
+		
+		errorLabel = new JLabel("<html>If there was an error opening "
+				+ "the browser, <br> try copying and pasting this link "
+				+ "into your browser</html>");
+		c.gridwidth = 7;
+		c.ipadx = 0;
+		c.gridx = 0;
+		c.gridy = 7;
+		c.fill = GridBagConstraints.BOTH;
+		c.insets = new Insets(0,0,0,0);
+		errorLabel.setVisible(false);
+		add(errorLabel, c);
+		
+		text = new JTextField(urlName);
+		text.setEditable(false);
+		c.gridy = 8;
+		text.setVisible(false);
+		add(text,c);
 		
 		add(welcomeLabel);
 	}
