@@ -5,8 +5,10 @@ import com.yh.chat.gui.chatpanel.ChatPanel;
 import com.yh.chat.gui.chatpanel.EmptyChat;
 import com.yh.chat.gui.chatpanel.EntryPanel;
 import com.yh.chat.gui.searchpanel.SearchPanel;
+import com.yh.chat.gui.values.WindowSizes;
 
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -44,7 +46,12 @@ public class Frame {
 	
 	public Frame(FrameOpts opt){
 		frame.setVisible(true);
-		frame.setBounds(25, 25, 1100, 700);
+		Toolkit tk = Toolkit.getDefaultToolkit();  
+		int xSize = ((int) tk.getScreenSize().getWidth());  
+		int ySize = ((int) tk.getScreenSize().getHeight());  
+		WindowSizes.setX(xSize);
+		WindowSizes.setY(ySize);
+		frame.setBounds(0,0,xSize,ySize);  
 		frame.getContentPane().setBackground(new Color(0x123456));
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setLayout(null);
