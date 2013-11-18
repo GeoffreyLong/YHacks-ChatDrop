@@ -9,4 +9,17 @@ public class WindowSizes {
 	
 	public static int getY()
 	{return yDim;}
+	
+	public static void setX(int x){
+		xDim = x;
+	}
+	public static void setY(int y){
+		yDim = y;
+	}
+	public static int getXCenter(){
+		return xDim/2;
+	}
+	public static int getYCenter(){
+		return yDim/2;
+	}
 }
