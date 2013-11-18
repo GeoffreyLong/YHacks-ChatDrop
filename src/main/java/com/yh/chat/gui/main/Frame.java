@@ -109,7 +109,9 @@ public class Frame {
 	
 	public static void initChat(MessageSorter messages, SharedFolder sharedFolder){
 		frame.getContentPane().removeAll();
-		chatPanel.removeAll();
+		if (chatPanel!=null){
+			chatPanel.removeAll();
+		}
 		welcomePanel();
 		empty.setVisible(false);
 		entryPanel = new EntryPanel(sharedFolder, messages);
