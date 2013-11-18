@@ -27,6 +27,9 @@ public class CreateChat extends JButton{
 		add(create);
 	}
 	
+	//TODO create more stringent file getting attributes
+	//Are there any conditions to watch out for?  
+	//ie files we don't want users selecting?
 	public java.io.File getFile(){
 		Boolean old = UIManager.getBoolean("FileChooser.readOnly");  
 		UIManager.put("FileChooser.readOnly", Boolean.TRUE);  
