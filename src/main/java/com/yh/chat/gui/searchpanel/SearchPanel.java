@@ -58,17 +58,19 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		newChat.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				java.io.File file = newChat.getFile();
-				ArrayList list = new ArrayList<Message>();
-				SharedFolder a = new SharedFolderImpl(file);
-				MessageSorter messages = null;
-				try {
-					InitConversation.create(a);
-					messages = new MessageSorter(a);
-				} catch (DbxException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if (!file.getName().equals("")){
+					ArrayList list = new ArrayList<Message>();
+					SharedFolder a = new SharedFolderImpl(file);
+					MessageSorter messages = null;
+					try {
+						InitConversation.create(a);
+						messages = new MessageSorter(a);
+					} catch (DbxException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					Frame.initChat(messages, a);
 				}
-				Frame.initChat(messages, a);
 			}
 		});
 		addFiller();
