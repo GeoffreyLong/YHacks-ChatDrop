@@ -2,6 +2,9 @@ package com.yh.chat.gui.main;
 
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -21,6 +24,7 @@ import com.yh.chat.gui.values.WindowSizes;
 public class NewUserPanel extends JPanel implements ActionListener{
 	private final JTextField url;
 	private boolean readyBoolean = false;
+	private final String urlName;
 	
 	private class MouseAdapterOpenUrl
 	{
@@ -28,12 +32,14 @@ public class NewUserPanel extends JPanel implements ActionListener{
 	}
 	
 	public NewUserPanel(String authorizeUrl){
-		setLayout(null);
+		setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();;
 		setVisible(true);
 		setBounds(0,0,WindowSizes.getX(),WindowSizes.getY());
 		
 		JLabel welcomeLabel = new JLabel("<html>"
-				+ "<big>Welcome to ChatterBox!</big><br>"
+				+ "<div style='text-align:center'>"
+				+ "<big style='text-align:center'>Welcome to ChatterBox!</big></div><br>"
 				//logo here
 				+ "<p>This application allows you to easily converse across all your "
 				+ "shared folders. <br> Use this application to easily perform the following actions: "
@@ -53,37 +59,59 @@ public class NewUserPanel extends JPanel implements ActionListener{
 				+ "<li> Paste it to the text area and submit. </li>"
 				+ "</ul>"
 				+ "</html>");
-		welcomeLabel.setBounds(100,100,800,300);
+		c.gridx = 0;
+		c.gridy = 0;
+		c.gridheight = 4;
+		c.gridwidth = 4;
+		c.fill = GridBagConstraints.HORIZONTAL;
+		add(welcomeLabel, c);
 		
-		JButton urlField = new JButton(authorizeUrl);
-		urlField.setBounds(50,450,800,20);
+		urlName = authorizeUrl;
+		
+		JButton urlField = new JButton("Authorization Link");
 		urlField.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				super.mouseClicked(e);
 				try {
-					OpenResource.open(new URI(((JButton) e.getSource()).getText()));
+					OpenResource.open(new URI(urlName));
 				} catch (URISyntaxException e1) {
 					e1.printStackTrace();
 				}
 			}
 			
 		});
-		
-		add(urlField);
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 5;
+		c.insets = new Insets(10,5,10,0);
+		c.fill = GridBagConstraints.NONE;
+		add(urlField, c);
 		
 		url = new JTextField();
-		url.setBounds(150,500,400,30);
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 6;
+		c.ipadx = 390;
+		c.fill = GridBagConstraints.VERTICAL;
+		c.anchor = GridBagConstraints.WEST;
+		add(url, c);
 		
 		
 		JButton online = new JButton("Submit");
-		online.setBounds(600,500,100,30);
 		online.addActionListener(this);
+		c.gridheight = 1;
+		c.gridwidth = 1;
+		c.gridx = 0;
+		c.gridy = 6;
+		c.fill = GridBagConstraints.NONE;
+		c.ipadx = 40;
+		c.anchor = GridBagConstraints.EAST;
+		add(online, c);
 		
 		add(welcomeLabel);
-		add(online);
-		add(url);
 	}
 	public Dimension getPreferredSize() {
         return new Dimension(WindowSizes.getX(),WindowSizes.getY());
