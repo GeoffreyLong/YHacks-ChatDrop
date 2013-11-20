@@ -47,6 +47,7 @@ public class Frame {
 	
 	public Frame(FrameOpts opt){
 		frame.setVisible(true);
+		frame.setTitle("ChatterBox");
 		Toolkit tk = Toolkit.getDefaultToolkit();  
 		int xSize = ((int) tk.getScreenSize().getWidth());  
 		int ySize = ((int) tk.getScreenSize().getHeight());  
