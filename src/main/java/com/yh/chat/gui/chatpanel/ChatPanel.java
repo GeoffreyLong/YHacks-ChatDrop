@@ -38,6 +38,7 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 	private MessageSorter messageSorter;
 	private int messageAmount = 10;
 	private static boolean allowScrollUp = true;
+	JLabel noDataLabel;
 	
 	public void update()
 	{
@@ -46,13 +47,16 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 		innerPanel.removeAll();
 		List<SortableByDate> messages = messageSorter.getMessages(messageAmount);
 		
-		if (messages.size()<=0){
-			JLabel label = new JLabel("no data");
-			label.setBounds(100,300,100,20);
-			innerPanel.add(label);
+		noDataLabel = new JLabel("no data");
+		noDataLabel.setBounds(100,300,100,20);
+		innerPanel.add(noDataLabel);
+		
+		if (messages.size()<=0 && innerPanel.getComponents().length<=1){
+			noDataLabel.setVisible(true);
 		}
 		else
 		{
+			noDataLabel.setVisible(false);
 			for (SortableByDate message : messages){
 				MessagePanel messagePanel = new MessagePanel(message);
 				int ySize = messagePanel.getYSize();
