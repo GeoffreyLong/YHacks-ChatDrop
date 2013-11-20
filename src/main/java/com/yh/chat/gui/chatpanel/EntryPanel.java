@@ -28,6 +28,7 @@ import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.MessageImpl;
 import com.yh.chat.core.objects.SharedFolder;
 import com.yh.chat.gui.main.Frame;
+import com.yh.chat.gui.values.WindowSizes;
 
 public class EntryPanel extends JPanel implements ActionListener{
 	final JTextArea entryArea;
@@ -43,7 +44,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 		setBackground(new Color(0xBFCFEF));
 		DefaultCaret caret = (DefaultCaret)entryArea.getCaret();
 		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-		entryArea.setBounds(5,5,650,155);
+		entryArea.setBounds(5,5,3*WindowSizes.getX()/4-40,155);
 		entryArea.setLineWrap(true);
 		entryArea.setWrapStyleWord(true);
 		setLayout(null);
@@ -51,7 +52,8 @@ public class EntryPanel extends JPanel implements ActionListener{
 		setVisible(true);
 		
 		JButton send = new JButton ("Send");
-		send.setBounds(670,100,100,50);
+		send.setBounds(3*WindowSizes.getX()/4-135,165,100,30);
+		send.setBackground(new Color(0xDDCCAA));
 		send.addActionListener(this);
 		add(send);
 		

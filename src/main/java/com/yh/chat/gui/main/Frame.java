@@ -116,7 +116,7 @@ public class Frame {
 		welcomePanel();
 		empty.setVisible(false);
 		entryPanel = new EntryPanel(sharedFolder, messages);
-		entryPanel.setBounds(310,500,780,165);
+		entryPanel.setBounds(WindowSizes.getX()/4+15, WindowSizes.getY()/13+20 + 2*(12*WindowSizes.getY()/13-65)/3,3*WindowSizes.getX()/4-30, 200);
 		createChat(sharedFolder);
 		Timer timer = new Timer(5000, chat = new Chat(sharedFolder));
 		timer.start();
@@ -138,7 +138,7 @@ public class Frame {
 		entryPanel.updateMessages(sharedFolder);
 		MessageSorter messages = new MessageSorter(sharedFolder);
 		chatPanel = new ChatPanel(messages);
-		chatPanel.setBounds(310,65,780,430);
+		chatPanel.setBounds(WindowSizes.getX()/4+10,WindowSizes.getY()/13+10,3*WindowSizes.getX()/4-20, 12*WindowSizes.getY()/13 - 65);
 		frame.add(entryPanel);
 		frame.add(chatPanel);
 		frame.validate();
@@ -172,7 +172,7 @@ public class Frame {
 	}
 	public static void welcomePanel(){
 		WelcomePanel welcome = new WelcomePanel();
-		welcome.setBounds(WindowSizes.getX()/4+10,5, 3*WindowSizes.getX()/4-20,55);
+		welcome.setBounds(WindowSizes.getX()/4+10,5, 3*WindowSizes.getX()/4-20,WindowSizes.getY()/13);
 		frame.add(welcome);
 		frame.validate();
 		frame.repaint();

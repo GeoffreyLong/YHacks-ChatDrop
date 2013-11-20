@@ -2,6 +2,7 @@ package com.yh.chat.gui.chatpanel;
 
 import com.yh.chat.gui.searchpanel.CreateChat;
 import com.yh.chat.gui.searchpanel.Project;
+import com.yh.chat.gui.values.WindowSizes;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -124,7 +125,7 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 		update(messageSorter);
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 		JScrollPane scroll = new JScrollPane(innerPanel);
-		scroll.setBounds(5,5,765,390);
+		scroll.setBounds(5,5,3*WindowSizes.getX()/4-30, 2*(12*WindowSizes.getY()/13-65)/3);
 		add(scroll);
 		vertical = scroll.getVerticalScrollBar();
 		vertical.setValue(1);
