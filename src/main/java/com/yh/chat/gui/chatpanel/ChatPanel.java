@@ -139,6 +139,7 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		scrollToBottom();
 		validate();
+		repaint();
 	}
 	public void scrollToVal(int val)
 	{

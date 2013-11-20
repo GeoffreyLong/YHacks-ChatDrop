@@ -37,6 +37,7 @@ public class Frame {
 	private static EntryPanel entryPanel;
 	private static ChatPanel chatPanel;
 	private static Chat chat;
+	static Timer timer;
 	
 	public enum FrameOpts
 	{
@@ -118,7 +119,11 @@ public class Frame {
 		entryPanel = new EntryPanel(sharedFolder, messages);
 		entryPanel.setBounds(WindowSizes.getX()/4+15, WindowSizes.getY()/13+20 + 2*(12*WindowSizes.getY()/13-65)/3,3*WindowSizes.getX()/4-30, 200);
 		createChat(sharedFolder);
-		Timer timer = new Timer(5000, chat = new Chat(sharedFolder));
+		
+		if(timer!=null){
+			timer.stop();
+		}
+		timer = new Timer(5000, chat = new Chat(sharedFolder));
 		timer.start();
 	}
 	public static void updateChat(SharedFolder sharedFolder)
