@@ -93,7 +93,8 @@ public class Frame {
 	
 	public static void initSearch(List<SharedFolder> list){
 		SearchPanel searchPanel = new SearchPanel(list);
-		searchPanel.setBounds(5,5,300,660);
+		//searchPanel.setBounds(5,5,300,660);
+		searchPanel.setBounds(5,5, WindowSizes.getX()/4, WindowSizes.getY()-60);
 		frame.add(searchPanel);
 		frame.validate();
 		frame.repaint();

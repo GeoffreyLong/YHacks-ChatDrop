@@ -26,6 +26,7 @@ import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.SharedFolder;
 import com.yh.chat.core.objects.SharedFolderImpl;
 import com.yh.chat.gui.main.Frame;
+import com.yh.chat.gui.values.WindowSizes;
 
 public class SearchPanel extends JPanel implements DocumentListener {
 	final JTextField searchField;
@@ -43,12 +44,12 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		this.files = list;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
 		JScrollPane scroll = new JScrollPane(projectPanel);
-		scroll.setBounds(5,60,290,590);
+		scroll.setBounds(5,60,WindowSizes.getX()/4-10,WindowSizes.getY()-125);
 		projectPanel.setBounds(5,60,280,580);
 		
-		newChat.setPreferredSize(new Dimension(270,50));
-		newChat.setMaximumSize(new Dimension(270,50));
-		newChat.setMinimumSize(new Dimension(270,50));
+		newChat.setPreferredSize(new Dimension(300,50));
+		newChat.setMaximumSize(new Dimension(300,50));
+		newChat.setMinimumSize(new Dimension(300,50));
 		/*newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/CreateButton.png")));  
 		newChat.setBorderPainted(false);  
 		newChat.setFocusPainted(false);  
@@ -79,7 +80,7 @@ public class SearchPanel extends JPanel implements DocumentListener {
 		addProjects(list);
 		
 		searchField = new JTextField();
-		searchField.setBounds(5,5,290,50);
+		searchField.setBounds(5,5,WindowSizes.getX()/4-10,50);
 		searchField.getDocument().addDocumentListener(this);
 		add(searchField);
 		add(scroll);
@@ -87,8 +88,8 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	}
 
 	public void addFiller(){
-        Dimension minSize = new Dimension(270, 10);
-        Dimension prefSize = new Dimension(270, 10);
+        Dimension minSize = new Dimension(300, 10);
+        Dimension prefSize = new Dimension(300, 10);
         Dimension maxSize = new Dimension(Short.MAX_VALUE, 10);
         projectPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 	}
@@ -124,9 +125,9 @@ public class SearchPanel extends JPanel implements DocumentListener {
 			for (SharedFolder file : afiles){
 				final Project proj = new Project(file);
 				
-				proj.setPreferredSize(new Dimension(270,50));
-				proj.setMaximumSize(new Dimension(270,50));
-				proj.setMinimumSize(new Dimension(270,50));
+				proj.setPreferredSize(new Dimension(300,50));
+				proj.setMaximumSize(new Dimension(300,50));
+				proj.setMinimumSize(new Dimension(300,50));
 				proj.setAlignmentX(Component.CENTER_ALIGNMENT);
 				
 				proj.addActionListener(new ActionListener(){
