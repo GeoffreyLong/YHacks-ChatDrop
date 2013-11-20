@@ -172,7 +172,7 @@ public class Frame {
 	}
 	public static void welcomePanel(){
 		WelcomePanel welcome = new WelcomePanel();
-		welcome.setBounds(310,5,780,55);
+		welcome.setBounds(WindowSizes.getX()/4+10,5, 3*WindowSizes.getX()/4-20,55);
 		frame.add(welcome);
 		frame.validate();
 		frame.repaint();
