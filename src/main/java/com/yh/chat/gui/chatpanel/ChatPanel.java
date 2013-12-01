@@ -1,5 +1,6 @@
 package com.yh.chat.gui.chatpanel;
 
+import com.yh.chat.gui.UI_Elements.StyledPanel;
 import com.yh.chat.gui.searchpanel.CreateChat;
 import com.yh.chat.gui.searchpanel.Project;
 import com.yh.chat.gui.values.WindowSizes;
@@ -32,7 +33,7 @@ import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.SharedFolder;
 import com.yh.chat.core.objects.SortableByDate;
 
-public class ChatPanel extends JPanel implements AdjustmentListener{
+public class ChatPanel extends StyledPanel implements AdjustmentListener{
 	JScrollBar vertical;
 	JPanel innerPanel = new JPanel();
 	private MessageSorter messageSorter;
@@ -136,7 +137,6 @@ public class ChatPanel extends JPanel implements AdjustmentListener{
 		vertical.addAdjustmentListener(new AdjListener());
 		vertical.setUnitIncrement(16);
 		
-		setBorder(BorderFactory.createLineBorder(Color.black));
 		scrollToBottom();
 		validate();
 		repaint();

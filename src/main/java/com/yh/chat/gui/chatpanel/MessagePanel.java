@@ -14,6 +14,7 @@ import com.yh.chat.core.display.DateFormat;
 import com.yh.chat.core.methods.StringUtils;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.SortableByDate;
+import com.yh.chat.gui.UI_Elements.StyledPanel;
 
 public class MessagePanel extends JPanel{
 

@@ -1,6 +1,8 @@
 package com.yh.chat.gui.main;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -8,15 +10,17 @@ import javax.imageio.ImageIO;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class WelcomePanel extends JPanel{
+import com.yh.chat.gui.UI_Elements.StyledPanel;
+
+public class WelcomePanel extends StyledPanel{
 	private BufferedImage image;
 	public WelcomePanel(){
-		setLayout(null);
+		setLayout(new GridBagLayout());
 		setBounds(0,0,780,60);
 		JLabel welcome = new JLabel("<html>"
 				+ "Welcome to ChatterBox"
 				+ "</html>");
-		welcome.setBounds(310,10,300,30);
+		welcome.setForeground(Color.WHITE);
 		add(welcome);
 
 		try {                

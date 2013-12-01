@@ -25,10 +25,11 @@ import com.yh.chat.core.init.InitConversation;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.SharedFolder;
 import com.yh.chat.core.objects.SharedFolderImpl;
+import com.yh.chat.gui.UI_Elements.StyledPanel;
 import com.yh.chat.gui.main.Frame;
 import com.yh.chat.gui.values.WindowSizes;
 
-public class SearchPanel extends JPanel implements DocumentListener {
+public class SearchPanel extends StyledPanel implements DocumentListener {
 	final JTextField searchField;
 	//File root;
 	List<Project> projects;
@@ -38,8 +39,6 @@ public class SearchPanel extends JPanel implements DocumentListener {
 	
 	public SearchPanel(List<SharedFolder> list){
 		setLayout(null);
-		setBorder(BorderFactory.createLineBorder(Color.black));
-		setBackground(new Color(0xBFCFEF));
 		
 		this.files = list;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
