@@ -46,9 +46,9 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		scroll.setBounds(5,60,WindowSizes.getX()/4-10,WindowSizes.getY()-125);
 		projectPanel.setBounds(5,60,280,580);
 		
-		newChat.setPreferredSize(new Dimension(300,50));
-		newChat.setMaximumSize(new Dimension(300,50));
-		newChat.setMinimumSize(new Dimension(300,50));
+		newChat.setPreferredSize(new Dimension(200,50));
+		newChat.setMaximumSize(new Dimension(200,50));
+		newChat.setMinimumSize(new Dimension(200,50));
 		/*newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/CreateButton.png")));  
 		newChat.setBorderPainted(false);  
 		newChat.setFocusPainted(false);  
@@ -87,8 +87,8 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 	}
 
 	public void addFiller(){
-        Dimension minSize = new Dimension(300, 10);
-        Dimension prefSize = new Dimension(300, 10);
+        Dimension minSize = new Dimension(200, 10);
+        Dimension prefSize = new Dimension(200, 10);
         Dimension maxSize = new Dimension(Short.MAX_VALUE, 10);
         projectPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 	}
@@ -124,9 +124,9 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 			for (SharedFolder file : afiles){
 				final Project proj = new Project(file);
 				
-				proj.setPreferredSize(new Dimension(300,50));
-				proj.setMaximumSize(new Dimension(300,50));
-				proj.setMinimumSize(new Dimension(300,50));
+				proj.setPreferredSize(new Dimension(200,50));
+				proj.setMaximumSize(new Dimension(200,50));
+				proj.setMinimumSize(new Dimension(200,50));
 				proj.setAlignmentX(Component.CENTER_ALIGNMENT);
 				
 				proj.addActionListener(new ActionListener(){
