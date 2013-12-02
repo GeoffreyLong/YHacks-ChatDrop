@@ -1,5 +1,6 @@
 package com.yh.chat.gui.chatpanel;
 
+import com.yh.chat.gui.UI_Elements.Layout;
 import com.yh.chat.gui.UI_Elements.StyledPanel;
 import com.yh.chat.gui.searchpanel.CreateChat;
 import com.yh.chat.gui.searchpanel.Project;
@@ -40,6 +41,7 @@ public class ChatPanel extends StyledPanel implements AdjustmentListener{
 	private int messageAmount = 10;
 	private static boolean allowScrollUp = true;
 	JLabel noDataLabel;
+	private Rectangle panelBounds;
 	
 	public void update()
 	{
@@ -71,6 +73,12 @@ public class ChatPanel extends StyledPanel implements AdjustmentListener{
 		}
 		
 		validate();
+	}
+	
+	private void initLayout(){
+		panelBounds = Layout.getChatPanel();
+		
+		
 	}
 	
 	public void update(MessageSorter messageSorter)

@@ -2,6 +2,7 @@ package com.yh.chat.gui.chatpanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -27,6 +28,7 @@ import com.yh.chat.core.io.ChatWriter;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.MessageImpl;
 import com.yh.chat.core.objects.SharedFolder;
+import com.yh.chat.gui.UI_Elements.Layout;
 import com.yh.chat.gui.main.Frame;
 import com.yh.chat.gui.values.WindowSizes;
 
@@ -35,27 +37,15 @@ public class EntryPanel extends JPanel implements ActionListener{
 	private boolean isShifted = false;
 	private SharedFolder sharedFolder;
 	private MessageSorter messages;
+	private Rectangle panelBounds;
+	private JButton send;
 	
 	public EntryPanel(SharedFolder sharedFolder, MessageSorter messages){
 		this.sharedFolder = sharedFolder;
 		this.messages = messages;
-		setBorder(BorderFactory.createLineBorder(Color.black));
 		entryArea = new JTextArea();
-		setBackground(new Color(0xBFCFEF));
-		DefaultCaret caret = (DefaultCaret)entryArea.getCaret();
-		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
-		entryArea.setBounds(5,5,3*WindowSizes.getX()/4-40,155);
-		entryArea.setLineWrap(true);
-		entryArea.setWrapStyleWord(true);
-		setLayout(null);
-		add(entryArea);
-		setVisible(true);
-		
-		JButton send = new JButton ("Send");
-		send.setBounds(3*WindowSizes.getX()/4-135,165,100,30);
-		send.setBackground(new Color(0xDDCCAA));
-		send.addActionListener(this);
-		add(send);
+
+		initComponents();
 		
         KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
         InputMap inputMap = entryArea.getInputMap();
@@ -73,6 +63,34 @@ public class EntryPanel extends JPanel implements ActionListener{
         });
 	}
 
+	private void initComponents(){
+		setBackground(new Color(0xBFCFEF));
+		DefaultCaret caret = (DefaultCaret)entryArea.getCaret();
+		caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+		
+		send = new JButton ("Send");
+		send.setBackground(new Color(0xDDCCAA));
+		send.addActionListener(this);
+
+		entryArea.setLineWrap(true);
+		entryArea.setWrapStyleWord(true);
+	}
+	
+	private void initLayout(){
+		setLayout(null);
+		setVisible(true);
+		setBorder(BorderFactory.createLineBorder(Color.black));
+		
+		panelBounds = Layout.getEntryPanel();
+		
+		entryArea.setBounds(5,5,3*WindowSizes.getX()/4-40,155);
+		
+		send.setBounds(3*WindowSizes.getX()/4-135,165,100,30);
+		
+		add(entryArea);
+		add(send);
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		if (e.getActionCommand().equals("Send")){
 			pipeData();
