@@ -16,7 +16,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import com.dropbox.core.DbxEntry.File;
 import com.yh.chat.gui.main.Frame;
 
-public class CreateChat extends JButton{
+public class CreateChat extends ChatButton{
 	public CreateChat(String buttonName){
 		super(buttonName);
 		setBorder(BorderFactory.createLineBorder(Color.black));

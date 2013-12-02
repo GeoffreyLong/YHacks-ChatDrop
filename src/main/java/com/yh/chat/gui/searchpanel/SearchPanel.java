@@ -3,6 +3,7 @@ package com.yh.chat.gui.searchpanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ import com.yh.chat.core.init.InitConversation;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.SharedFolder;
 import com.yh.chat.core.objects.SharedFolderImpl;
+import com.yh.chat.gui.UI_Elements.Layout;
 import com.yh.chat.gui.UI_Elements.StyledPanel;
 import com.yh.chat.gui.main.Frame;
 import com.yh.chat.gui.values.WindowSizes;
@@ -36,24 +38,62 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 	List<SharedFolder> files;
 	JPanel projectPanel = new JPanel();
 	CreateChat newChat = new CreateChat("Create a new Chat");
+	Rectangle panelBounds;
+	JScrollPane scroll;
+	private int buttonWidth;
 	
 	public SearchPanel(List<SharedFolder> list){
 		setLayout(null);
 		
+		searchField = new JTextField();
+		searchField.getDocument().addDocumentListener(this);
+		
 		this.files = list;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 
-		JScrollPane scroll = new JScrollPane(projectPanel);
-		scroll.setBounds(5,60,WindowSizes.getX()/4-10,WindowSizes.getY()-125);
-		projectPanel.setBounds(5,60,280,580);
+		scroll = new JScrollPane(projectPanel);
 		
-		newChat.setPreferredSize(new Dimension(200,50));
-		newChat.setMaximumSize(new Dimension(200,50));
-		newChat.setMinimumSize(new Dimension(200,50));
+		initLayout();
+		
+		initNewChat();
+		
+		addProjects(list);
+		
+		repaint();
+	}
+
+	private void initComponents(){
+		
+	}
+	
+	private void initLayout(){
+		panelBounds = Layout.getSearchPanel();
+		int innerWidth = panelBounds.width-11;
+		
+		searchField.setBounds(5, 5, innerWidth, panelBounds.height/15);
+		
+		scroll.setBounds(5, panelBounds.height/15 + 10, 
+				innerWidth, 14*panelBounds.height/15 - 15);
+		
+		projectPanel.setBounds(5, panelBounds.height/15 + 10, 
+				innerWidth, 14*panelBounds.height/15 - 15);
+		
+		buttonWidth = (int)(innerWidth*.9);
+		
+		add(searchField);
+		add(scroll);
+	}
+	
+	private void initNewChat(){
+		newChat.setPreferredSize(new Dimension(buttonWidth,50));
+		newChat.setMaximumSize(new Dimension(buttonWidth,50));
+		newChat.setMinimumSize(new Dimension(buttonWidth,50));
+		
 		/*newChat.setIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/CreateButton.png")));  
 		newChat.setBorderPainted(false);  
 		newChat.setFocusPainted(false);  
 		newChat.setContentAreaFilled(false);  
 		newChat.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("../UI_Elements/ButtonPressed.png")));*/
+		
 		newChat.setAlignmentX(Component.CENTER_ALIGNMENT);
 		newChat.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
@@ -75,23 +115,21 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		});
 		addFiller();
 		projectPanel.add(newChat);
-		
-		addProjects(list);
-		
-		searchField = new JTextField();
-		searchField.setBounds(5,5,WindowSizes.getX()/4-10,50);
-		searchField.getDocument().addDocumentListener(this);
-		add(searchField);
-		add(scroll);
-		repaint();
 	}
-
+	
 	public void addFiller(){
-        Dimension minSize = new Dimension(200, 10);
-        Dimension prefSize = new Dimension(200, 10);
+        Dimension minSize = new Dimension(buttonWidth, 10);
+        Dimension prefSize = new Dimension(buttonWidth, 10);
         Dimension maxSize = new Dimension(Short.MAX_VALUE, 10);
         projectPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 	}
+	
+	/*
+	 * case study question
+	 * rewriting code
+	 * unit testing -> diff types
+	 * question on gantt shit
+	 */
 	
 	public void insertUpdate(DocumentEvent arg0) {
 		showProjects();
@@ -124,9 +162,9 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 			for (SharedFolder file : afiles){
 				final Project proj = new Project(file);
 				
-				proj.setPreferredSize(new Dimension(200,50));
-				proj.setMaximumSize(new Dimension(200,50));
-				proj.setMinimumSize(new Dimension(200,50));
+				proj.setPreferredSize(new Dimension(buttonWidth,50));
+				proj.setMaximumSize(new Dimension(buttonWidth,50));
+				proj.setMinimumSize(new Dimension(buttonWidth,50));
 				proj.setAlignmentX(Component.CENTER_ALIGNMENT);
 				
 				proj.addActionListener(new ActionListener(){
