@@ -46,6 +46,7 @@ public class EntryPanel extends JPanel implements ActionListener{
 		entryArea = new JTextArea();
 
 		initComponents();
+		initLayout();
 		
         KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
         InputMap inputMap = entryArea.getInputMap();
@@ -83,9 +84,14 @@ public class EntryPanel extends JPanel implements ActionListener{
 		
 		panelBounds = Layout.getEntryPanel();
 		
-		entryArea.setBounds(5,5,3*WindowSizes.getX()/4-40,155);
+		entryArea.setBounds(5,5,panelBounds.width-10, 5*panelBounds.height/6-10);
 		
-		send.setBounds(3*WindowSizes.getX()/4-135,165,100,30);
+		int sendHeight = panelBounds.height/7;
+		int sendWidth = panelBounds.width/8;
+		
+		send.setBounds(panelBounds.width-sendWidth-5,
+				panelBounds.height-sendHeight-5,
+				sendWidth,sendHeight);
 		
 		add(entryArea);
 		add(send);

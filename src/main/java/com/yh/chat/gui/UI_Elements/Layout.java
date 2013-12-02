@@ -78,9 +78,8 @@ public class Layout {
 	public static Rectangle getEntryPanel(){
 		int x = menuLeftWidth+10;
 		int y = welcomePanelHeight + messagePanelHeight + 10;
-		int width = menuLeftWidth - 10;
-		//TODO
-		int height = 200;
+		int width = menuRightWidth - 20;
+		int height = entryPanelHeight - 20;
 		
 		Rectangle rect = new Rectangle(x, y, width, height);
 		return rect;

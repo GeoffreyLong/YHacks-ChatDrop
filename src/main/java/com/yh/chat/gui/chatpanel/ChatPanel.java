@@ -63,7 +63,7 @@ public class ChatPanel extends StyledPanel implements AdjustmentListener{
 			for (SortableByDate message : messages){
 				MessagePanel messagePanel = new MessagePanel(message);
 				int ySize = messagePanel.getYSize();
-				Dimension dim = new Dimension(740, ySize);
+				Dimension dim = new Dimension(Layout.getChatPanel().width-20, ySize);
 				messagePanel.setPreferredSize(dim);
 				messagePanel.setMaximumSize(dim);
 				messagePanel.setMinimumSize(dim);
@@ -138,7 +138,7 @@ public class ChatPanel extends StyledPanel implements AdjustmentListener{
 		update(messageSorter);
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 		JScrollPane scroll = new JScrollPane(innerPanel);
-		scroll.setBounds(5,5,3*WindowSizes.getX()/4-30, 2*(12*WindowSizes.getY()/13-65)/3);
+		scroll.setBounds(5,5,Layout.getChatPanel().width-10,2*Layout.getChatPanel().height/3);
 		add(scroll);
 		vertical = scroll.getVerticalScrollBar();
 		vertical.setValue(1);
