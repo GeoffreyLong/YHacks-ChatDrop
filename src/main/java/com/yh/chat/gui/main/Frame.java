@@ -1,5 +1,6 @@
 package com.yh.chat.gui.main;
 
+import com.yh.chat.gui.UI_Elements.Layout;
 import com.yh.chat.gui.chatpanel.Chat;
 import com.yh.chat.gui.chatpanel.ChatPanel;
 import com.yh.chat.gui.chatpanel.EmptyChat;
@@ -38,6 +39,7 @@ public class Frame {
 	private static ChatPanel chatPanel;
 	private static Chat chat;
 	static Timer timer;
+	private static Layout layout;
 	
 	public enum FrameOpts
 	{
@@ -53,10 +55,12 @@ public class Frame {
 		int ySize = ((int) tk.getScreenSize().getHeight());  
 		WindowSizes.setX(xSize);
 		WindowSizes.setY(ySize);
+		
 		frame.setBounds(0,0,xSize,ySize);  
 		frame.getContentPane().setBackground(new Color(0x123456));
 		frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		frame.setLayout(null);
+		
 		switch(opt)
 		{
 			case Init:
@@ -91,12 +95,16 @@ public class Frame {
         };
         frame.addWindowListener(exitListener);
 		
+		int realX = frame.getContentPane().getWidth();
+		int realY = frame.getContentPane().getHeight();
+		Layout layout = new Layout(realX, realY);
 	}
 	
 	public static void initSearch(List<SharedFolder> list){
 		SearchPanel searchPanel = new SearchPanel(list);
 		//searchPanel.setBounds(5,5,300,660);
-		searchPanel.setBounds(5,5, WindowSizes.getX()/4, WindowSizes.getY()-60);
+		searchPanel.setBounds(5,5, layout.getMenuLeftWidth()-5, layout.getFrameHeight()-10);
+		
 		frame.add(searchPanel);
 		frame.validate();
 		frame.repaint();
@@ -104,7 +112,7 @@ public class Frame {
 	public static void initEmptyChat(){
 		welcomePanel();
 		empty = new EmptyChat();
-		empty.setBounds(500,300,330,100);
+		empty.setBounds(layout.getEmptyChat());
 		frame.add(empty);
 		frame.validate();
 		frame.repaint();
@@ -118,7 +126,10 @@ public class Frame {
 		welcomePanel();
 		empty.setVisible(false);
 		entryPanel = new EntryPanel(sharedFolder, messages);
-		entryPanel.setBounds(WindowSizes.getX()/4+15, WindowSizes.getY()/13+20 + 2*(12*WindowSizes.getY()/13-65)/3,3*WindowSizes.getX()/4-30, 200);
+		entryPanel.setBounds(layout.getMenuLeftWidth()+10, 
+				layout.getWelcomePanelHeight() + layout.getMessagePanelHeight() + 10,
+				layout.getMenuLeftWidth() - 10, 
+				200);
 		createChat(sharedFolder);
 		
 		if(timer!=null){
@@ -178,7 +189,7 @@ public class Frame {
 	}
 	public static void welcomePanel(){
 		WelcomePanel welcome = new WelcomePanel();
-		welcome.setBounds(WindowSizes.getX()/4+10,5, 3*WindowSizes.getX()/4-20,WindowSizes.getY()/13);
+		welcome.setBounds(layout.getWelcome());
 		frame.add(welcome);
 		frame.validate();
 		frame.repaint();
