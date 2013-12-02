@@ -35,7 +35,7 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 	List<Project> projects;
 	List<SharedFolder> files;
 	JPanel projectPanel = new JPanel();
-	CreateChat newChat = new CreateChat();
+	CreateChat newChat = new CreateChat("Create a new Chat");
 	
 	public SearchPanel(List<SharedFolder> list){
 		setLayout(null);

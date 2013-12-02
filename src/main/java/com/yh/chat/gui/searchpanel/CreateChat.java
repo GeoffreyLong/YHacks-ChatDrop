@@ -17,14 +17,15 @@ import com.dropbox.core.DbxEntry.File;
 import com.yh.chat.gui.main.Frame;
 
 public class CreateChat extends JButton{
-	public CreateChat(){
+	public CreateChat(String buttonName){
+		super(buttonName);
 		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);
 		
 		//TODO add a + button like a nice green plus in a little subpanel like fb or whatever
-		JLabel create = new JLabel("Create A New Chat");
+		/*JLabel create = new JLabel("Create A New Chat");
 		create.setBounds(25,3,180,40);
-		add(create);
+		add(create);*/
 	}
 	
 	//TODO create more stringent file getting attributes
