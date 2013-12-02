@@ -2,6 +2,8 @@ package com.yh.chat.gui.UI_Elements;
 
 import java.awt.Rectangle;
 
+import com.yh.chat.gui.values.WindowSizes;
+
 public class Layout {
 	private static int frameWidth;
 	private static int frameHeight;
@@ -83,5 +85,22 @@ public class Layout {
 		Rectangle rect = new Rectangle(x, y, width, height);
 		return rect;
 	}
-	
+	public static Rectangle getSearchPanel(){
+		int x = 5;
+		int y = 5;
+		int width = menuLeftWidth-5;
+		int height = frameHeight - 10;
+		
+		Rectangle rect = new Rectangle(x, y, width, height);
+		return rect;
+	}
+	public static Rectangle getChatPanel(){
+		int x = menuLeftWidth + 5;
+		int y = welcomePanelHeight + 10;
+		int width = menuRightWidth - 10;
+		int height = chatPanelHeight - 15;
+		
+		Rectangle rect = new Rectangle(x, y, width, height);
+		return rect;
+	}
 }

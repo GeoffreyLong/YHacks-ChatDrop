@@ -103,7 +103,7 @@ public class Frame {
 	public static void initSearch(List<SharedFolder> list){
 		SearchPanel searchPanel = new SearchPanel(list);
 		//searchPanel.setBounds(5,5,300,660);
-		searchPanel.setBounds(5,5, layout.getMenuLeftWidth()-5, layout.getFrameHeight()-10);
+		searchPanel.setBounds(layout.getSearchPanel());
 		
 		frame.add(searchPanel);
 		frame.validate();
@@ -126,10 +126,7 @@ public class Frame {
 		welcomePanel();
 		empty.setVisible(false);
 		entryPanel = new EntryPanel(sharedFolder, messages);
-		entryPanel.setBounds(layout.getMenuLeftWidth()+10, 
-				layout.getWelcomePanelHeight() + layout.getMessagePanelHeight() + 10,
-				layout.getMenuLeftWidth() - 10, 
-				200);
+		entryPanel.setBounds(layout.getEntryPanel());
 		createChat(sharedFolder);
 		
 		if(timer!=null){
@@ -155,7 +152,7 @@ public class Frame {
 		entryPanel.updateMessages(sharedFolder);
 		MessageSorter messages = new MessageSorter(sharedFolder);
 		chatPanel = new ChatPanel(messages);
-		chatPanel.setBounds(WindowSizes.getX()/4+10,WindowSizes.getY()/13+10,3*WindowSizes.getX()/4-20, 12*WindowSizes.getY()/13 - 65);
+		chatPanel.setBounds(layout.getChatPanel());
 		frame.add(entryPanel);
 		frame.add(chatPanel);
 		frame.validate();
