@@ -104,23 +104,25 @@ public class EntryPanel extends JPanel implements ActionListener{
 	}
 	
 	public void pipeData(){
-		DateTime date = new DateTime();
-    	Message mess = new MessageImpl(Frame.name, entryArea.getText(), date);
-    	try {
-			new ChatWriter(sharedFolder, mess);
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (DbxException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		if (!entryArea.getText().equals("")){
+			DateTime date = new DateTime();
+	    	Message mess = new MessageImpl(Frame.name, entryArea.getText(), date);
+	    	try {
+				new ChatWriter(sharedFolder, mess);
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (DbxException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+	    	
+	    	entryArea.setText("");
+	    	Frame.updateChat(sharedFolder);
 		}
-    	
-    	entryArea.setText("");
-    	Frame.updateChat(sharedFolder);
 	}
 
 	public void updateMessages(SharedFolder messages2) {
