@@ -16,6 +16,8 @@ import javax.swing.text.JTextComponent;
 public class CustomCaret extends DefaultCaret{
 
 	public CustomCaret(){
+		//TODO  Have to edit the case where the cursor is XORing the 
+		//backwards highlight
 		this.setBlinkRate(1000);
 	}
 	  protected synchronized void damage(Rectangle r) {
