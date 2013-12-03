@@ -19,7 +19,6 @@ import com.yh.chat.gui.main.Frame;
 public class CreateChat extends ChatButton{
 	public CreateChat(String buttonName){
 		super(buttonName);
-		setBorder(BorderFactory.createLineBorder(Color.black));
 		setLayout(null);
 		
 		//TODO add a + button like a nice green plus in a little subpanel like fb or whatever
