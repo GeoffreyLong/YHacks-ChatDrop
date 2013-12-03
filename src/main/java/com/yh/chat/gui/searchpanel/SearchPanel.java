@@ -27,6 +27,7 @@ import com.yh.chat.core.init.InitConversation;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.SharedFolder;
 import com.yh.chat.core.objects.SharedFolderImpl;
+import com.yh.chat.gui.UI_Elements.CustomCaret;
 import com.yh.chat.gui.UI_Elements.Layout;
 import com.yh.chat.gui.UI_Elements.StyledPanel;
 import com.yh.chat.gui.main.Frame;
@@ -48,9 +49,11 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		setLayout(null);
 		
 		searchField = new JTextField();
+		searchField.setForeground(new Color(0x123456));
 		searchField.setBackground(new Color(0xEEEEEE));
 		searchField.setFont(new Font("Serif", Font.BOLD, 24));
 		searchField.getDocument().addDocumentListener(this);
+		searchField.setCaret(new CustomCaret());
 		
 		this.files = list;
 		projectPanel.setLayout(new BoxLayout(projectPanel, BoxLayout.Y_AXIS)); 

@@ -18,6 +18,7 @@ import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
+import javax.swing.text.Caret;
 import javax.swing.text.DefaultCaret;
 
 import org.joda.time.DateTime;
@@ -28,6 +29,7 @@ import com.yh.chat.core.io.ChatWriter;
 import com.yh.chat.core.objects.Message;
 import com.yh.chat.core.objects.MessageImpl;
 import com.yh.chat.core.objects.SharedFolder;
+import com.yh.chat.gui.UI_Elements.CustomCaret;
 import com.yh.chat.gui.UI_Elements.Layout;
 import com.yh.chat.gui.main.Frame;
 import com.yh.chat.gui.values.WindowSizes;
@@ -44,6 +46,8 @@ public class EntryPanel extends JPanel implements ActionListener{
 		this.sharedFolder = sharedFolder;
 		this.messages = messages;
 		entryArea = new JTextArea();
+		CustomCaret caret = new CustomCaret();
+		entryArea.setCaret(caret);
 
 		initComponents();
 		initLayout();

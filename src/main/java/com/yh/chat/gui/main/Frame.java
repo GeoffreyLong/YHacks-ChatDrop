@@ -22,6 +22,7 @@ import java.util.List;
 import javax.swing.Timer;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 
 import com.dropbox.core.DbxException;
 import com.yh.chat.core.CoreMain;
@@ -95,6 +96,13 @@ public class Frame {
         };
         frame.addWindowListener(exitListener);
 		
+        
+        UIManager.put("TextArea.selectionBackground", new Color(0x4A7023));
+        UIManager.put("TextArea.selectionForeground", new Color(0xFFFFFF));
+        
+        UIManager.put("TextField.selectionBackground", new Color(0x4A7023));
+        UIManager.put("TextField.selectionForeground", new Color(0xFFFFFF));
+        
 		int realX = frame.getContentPane().getWidth();
 		int realY = frame.getContentPane().getHeight();
 		Layout layout = new Layout(realX, realY);
