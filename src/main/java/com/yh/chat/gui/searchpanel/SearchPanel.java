@@ -3,6 +3,7 @@ package com.yh.chat.gui.searchpanel;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +38,7 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 	List<Project> projects;
 	List<SharedFolder> files;
 	JPanel projectPanel = new JPanel();
+	JPanel searchFieldPanel = new JPanel();
 	CreateChat newChat = new CreateChat("Create a new Chat");
 	Rectangle panelBounds;
 	JScrollPane scroll;
@@ -46,6 +48,8 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		setLayout(null);
 		
 		searchField = new JTextField();
+		searchField.setBackground(new Color(0xEEEEEE));
+		searchField.setFont(new Font("Serif", Font.BOLD, 24));
 		searchField.getDocument().addDocumentListener(this);
 		
 		this.files = list;
@@ -69,17 +73,26 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		panelBounds = Layout.getSearchPanel();
 		int innerWidth = panelBounds.width-11;
 		
-		searchField.setBounds(5, 5, innerWidth, panelBounds.height/15);
+		searchFieldPanel.setBounds(5, 5, innerWidth, panelBounds.height/15);
+		searchFieldPanel.setBorder(BorderFactory.createSoftBevelBorder(0));
+		searchFieldPanel.setBackground(new Color(0xEEEEEE));
+		searchFieldPanel.setVisible(true);
+		searchFieldPanel.setLayout(null);
+		
+		searchField.setBounds(55, 0, innerWidth-50, panelBounds.height/15-1);
+		searchField.setBorder(null);
+		searchFieldPanel.add(searchField);
 		
 		scroll.setBounds(5, panelBounds.height/15 + 10, 
 				innerWidth, 14*panelBounds.height/15 - 15);
+		scroll.setBorder(BorderFactory.createSoftBevelBorder(0));
 		
 		projectPanel.setBounds(5, panelBounds.height/15 + 10, 
 				innerWidth, 14*panelBounds.height/15 - 15);
 		
 		buttonWidth = (int)(innerWidth*.9);
 		
-		add(searchField);
+		add(searchFieldPanel);
 		add(scroll);
 	}
 	
