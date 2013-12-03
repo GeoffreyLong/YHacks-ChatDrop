@@ -82,9 +82,16 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		searchFieldPanel.setVisible(true);
 		searchFieldPanel.setLayout(null);
 		
-		searchField.setBounds(55, 0, innerWidth-50, panelBounds.height/15-1);
-		searchField.setBorder(null);
+		searchField.setBounds(45, 3, innerWidth-50, panelBounds.height/15-7);
+		searchField.setBorder(BorderFactory.createLineBorder(new Color(0x444444), 2));
 		searchFieldPanel.add(searchField);
+		
+		//TODO move the initial cursor over a few pixels
+		//TODO add magnifying glass image thing
+		JPanel imagePanel = new JPanel();
+		imagePanel.setBorder(BorderFactory.createLineBorder(new Color(0x444444), 2));
+		imagePanel.setBounds(5,3,45,panelBounds.height/15-7);
+		searchFieldPanel.add(imagePanel);
 		
 		scroll.setBounds(5, panelBounds.height/15 + 10, 
 				innerWidth, 14*panelBounds.height/15 - 15);

@@ -14,6 +14,9 @@ public class ChatButton extends JButton implements MouseListener{
 	public ChatButton(String buttonName){
 		super(buttonName);
 		
+		//TODO add the button press animation, 
+		//should be held down on button click or something
+		
 		color = new Color(0x123456);
 		
 		setBorder(BorderFactory.createLineBorder(color, 4));
