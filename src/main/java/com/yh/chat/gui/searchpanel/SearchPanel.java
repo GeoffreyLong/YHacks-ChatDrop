@@ -158,6 +158,7 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		List<SharedFolder> newFiles = new LinkedList<SharedFolder>();
 		
 		projectPanel.removeAll();
+		addFiller();
 		projectPanel.add(newChat);
 		for (SharedFolder file : files){
 			if (file.getTopLevel().getName().length()>desired.length()){
