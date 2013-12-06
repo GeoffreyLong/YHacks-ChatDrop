@@ -138,6 +138,7 @@ public class ChatPanel extends StyledPanel implements AdjustmentListener{
 		update(messageSorter);
 		innerPanel.setLayout(new BoxLayout(innerPanel, BoxLayout.Y_AXIS));
 		JScrollPane scroll = new JScrollPane(innerPanel);
+		scroll.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 		scroll.setBounds(5,5,Layout.getChatPanel().width-10,2*Layout.getChatPanel().height/3);
 		add(scroll);
 		vertical = scroll.getVerticalScrollBar();
