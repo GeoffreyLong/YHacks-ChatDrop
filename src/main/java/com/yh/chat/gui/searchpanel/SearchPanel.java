@@ -50,7 +50,7 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		
 		searchField = new JTextField();
 		searchField.setForeground(new Color(0x123456));
-		searchField.setBackground(new Color(0xEEEEEE));
+		searchField.setBackground(new Color(0xDDDDDD));
 		searchField.setFont(new Font("Serif", Font.BOLD, 24));
 		searchField.getDocument().addDocumentListener(this);
 		searchField.setCaret(new CustomCaret());
@@ -78,12 +78,13 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		
 		searchFieldPanel.setBounds(5, 5, innerWidth, panelBounds.height/15);
 		searchFieldPanel.setBorder(BorderFactory.createSoftBevelBorder(0));
-		searchFieldPanel.setBackground(new Color(0xEEEEEE));
+		searchFieldPanel.setBackground(new Color(0xDDDDDD));
 		searchFieldPanel.setVisible(true);
 		searchFieldPanel.setLayout(null);
 		
 		searchField.setBounds(45, 3, innerWidth-50, panelBounds.height/15-7);
 		searchField.setBorder(BorderFactory.createLineBorder(new Color(0x444444), 2));
+		searchField.setBackground(Color.WHITE);
 		searchFieldPanel.add(searchField);
 		
 		//TODO move the initial cursor over a few pixels
@@ -91,6 +92,7 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		JPanel imagePanel = new JPanel();
 		imagePanel.setBorder(BorderFactory.createLineBorder(new Color(0x444444), 2));
 		imagePanel.setBounds(5,3,45,panelBounds.height/15-7);
+		imagePanel.setBackground(Color.WHITE);
 		searchFieldPanel.add(imagePanel);
 		
 		scroll.setBounds(5, panelBounds.height/15 + 10, 
@@ -99,6 +101,7 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
 		
 		projectPanel.setBounds(5, panelBounds.height/15 + 10, 
 				innerWidth, 14*panelBounds.height/15 - 15);
+		projectPanel.setBackground(new Color(0xDDDDDD));
 		
 		buttonWidth = (int)(innerWidth*.9);
 		
