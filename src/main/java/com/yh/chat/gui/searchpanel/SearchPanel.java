@@ -150,13 +150,6 @@ public class SearchPanel extends StyledPanel implements DocumentListener {
         projectPanel.add(new Box.Filler(minSize, prefSize, maxSize));
 	}
 	
-	/*
-	 * case study question
-	 * rewriting code
-	 * unit testing -> diff types
-	 * question on gantt shit
-	 */
-	
 	public void insertUpdate(DocumentEvent arg0) {
 		showProjects();
 	}
